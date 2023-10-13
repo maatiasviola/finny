@@ -1,0 +1,26 @@
+.inputContainer {
+  display: flex;
+  padding: 12px 16px;
+  align-items: center;
+  border-radius: 16px;
+  border: 2px solid #e5e5e5;
+  background: #f7f7f7;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+::placeholder {
+  color: #afafaf;
+}
+
+.input {
+  display: flex;
+  color: #3c3c3c;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  background: transparent;
+  outline: 0;
+}

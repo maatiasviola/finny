@@ -1,0 +1,10 @@
+.homeContainer {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.unidadesContainer {
+  z-index: 0;
+  flex: 0.6; /* cambiar a 1 */
+}

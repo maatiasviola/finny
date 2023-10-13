@@ -1,0 +1,30 @@
+.buttonContainer {
+  border-radius: 16px;
+  border: 2px solid #e5e5e5;
+  background: #fff;
+  box-shadow: 0px 2px 0px 0px #e5e5e5;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 8px;
+  cursor: pointer;
+}
+
+.buttonText {
+  color: #42c62f;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 138.462% */
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.buttonIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}

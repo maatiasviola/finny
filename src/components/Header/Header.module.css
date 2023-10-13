@@ -1,0 +1,61 @@
+.header {
+  height: 40px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 70px;
+  border-bottom: 2px solid #e5e5e5;
+  background: #fff;
+}
+
+.logo {
+  width: 71px;
+  height: 31px;
+}
+
+.iconsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.singleIconContainer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 25px;
+  height: 30px;
+}
+
+.fireText {
+  color: #ff9600;
+  font-family: Inter;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 117.647% */
+}
+
+.superText {
+  color: #3f22ec;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 133.333% */
+  text-transform: uppercase;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  cursor: pointer;
+  margin-left: 14px;
+}

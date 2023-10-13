@@ -1,0 +1,19 @@
+:root {
+  --web-ui_navbar-width: 224px; /* Definir la variable CSS */
+  --web-ui_navbar-width-no-labels: 56px;
+}
+
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #ffffff;
+  color: #afafaf;
+  height: 100vh;
+  overflow-y: auto;
+  padding-left: 70px;
+  padding-right: 40px;
+  left: 0;
+  z-index: 1;
+}

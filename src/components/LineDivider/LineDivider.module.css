@@ -1,0 +1,25 @@
+.lineContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  outline: none;
+  text-align: center;
+  width: 100%;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: #e5e5e5;
+}
+
+.o {
+  color: #afafaf;
+  flex-grow: 0;
+  padding: 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}

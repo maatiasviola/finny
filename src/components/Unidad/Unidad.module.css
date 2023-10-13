@@ -1,0 +1,33 @@
+.unidadInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.unidadTitulo {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.36;
+  margin: 0;
+}
+
+.unidadDescripcion {
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.nivelesContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.warrenImagen {
+  height: 235.765px;
+  left: calc(50% + -19px);
+  top: 289.736px;
+  transform: translateY(-50%);
+  width: calc(50% + 3px);
+  position: absolute;
+}
