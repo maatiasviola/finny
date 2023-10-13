@@ -28,6 +28,7 @@ function Unidad() {
           }}
           textStyle={{
             color: "#FFF",
+            marginLeft: "10px",
           }}
         />
       </Seccion>

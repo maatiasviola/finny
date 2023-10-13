@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import StyledInput from "../../components/StyledInput/StyledInput";
 import styles from "./Login.module.css";
 import PressableButton from "../../components/PressableButton/PressableButton";
-import StyledButton from "../../components/StyledButton/StyledButton";
 import LineDivider from "../../components/LineDivider/LineDivider";
 import { icons } from "../../assets/icons";
 function Login() {
@@ -102,6 +101,7 @@ function Login() {
             }}
             textStyle={{
               color: "#3b5998",
+              marginLeft: "10px",
             }}
           />
 
@@ -118,6 +118,7 @@ function Login() {
             }}
             textStyle={{
               color: "#4285f4",
+              marginLeft: "10px",
             }}
           />
         </div>

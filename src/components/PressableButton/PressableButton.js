@@ -55,7 +55,7 @@ const ButtonText = styled.div`
   font-weight: 700;
   line-height: 27.5px;
   text-transform: uppercase;
-  margin-left: 10px;
+  margin-left: ${(props) => props.textStyle?.marginLeft || "0px"};
 `;
 
 const StyledImage = styled.img`
