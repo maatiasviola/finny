@@ -20,25 +20,42 @@ function PressableButton({
 export default PressableButton;
 
 const ButtonContainer = styled.div`
-  position: ${(props) => props.buttonStyle.position || "initial"};
-  right: ${(props) => props.buttonStyle.right || "initial"};
-  top: ${(props) => props.buttonStyle.top || "initial"};
-  width: ${(props) => props.buttonStyle.width || "auto"};
-  height: ${(props) => props.buttonStyle.height || "auto"};
-  margin-top: ${(props) => props.buttonStyle.marginTop || "0"};
+  position: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.position || "initial" : "initial"};
+  right: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.right || "initial" : "initial"};
+  top: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.top || "initial" : "initial"};
+  width: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.width || "auto" : "auto"};
+  min-width: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.minWidth || "auto" : "auto"};
+  height: ${(props) =>
+    (props.buttonStyle && props.buttonStyle.height) || "auto"};
+
+  margin-top: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.marginTop || "0" : "0"};
   background-color: ${(props) =>
-    props.buttonStyle.backgroundColor || "#42C62F"};
-  border-radius: ${(props) => props.buttonStyle.borderRadius || "16px"};
+    props.buttonStyle
+      ? props.buttonStyle.backgroundColor || "#42C62F"
+      : "#42C62F"};
+  border-radius: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.borderRadius || "16px" : "16px"};
   padding: 8px 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-width: ${(props) => props.buttonStyle.borderWidth || "auto"};
-  border-style: ${(props) => props.buttonStyle.borderStyle || "auto"};
-  border-color: ${(props) => props.buttonStyle.borderColor || "auto"};
+  border-width: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.borderWidth || "auto" : "auto"};
+  border-style: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.borderStyle || "auto" : "auto"};
+  border-color: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.borderColor || "auto" : "auto"};
   box-shadow: ${(props) =>
-    props.buttonStyle.boxShadow || "0px 4px 0px 0px #489D26"};
+    props.buttonStyle
+      ? props.buttonStyle.boxShadow || "0px 4px 0px 0px #489D26"
+      : "0px 4px 0px 0px #489D26"};
 
   &:active {
     box-shadow: none;

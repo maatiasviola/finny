@@ -17,6 +17,15 @@ const userIcon = require("./icons/userIcon.png");
 const bookIcon = require("./icons/bookIcon.png");
 const starIcon = require("./icons/starIcon.png");
 
+// Leccion
+const casaIcon = require("./icons/casa.png");
+const teslaIcon = require("./icons/tesla.png");
+const letraTesoroIcon = require("./icons/letraTesoro.png");
+
+// Icons
+const closeIcon = require("./icons/close.png");
+const heartIcon = require("./icons/heart.png");
+
 export const icons = {
   googleIcon,
   facebookIcon,
@@ -29,4 +38,9 @@ export const icons = {
   userIcon,
   bookIcon,
   starIcon,
+  casaIcon,
+  teslaIcon,
+  letraTesoroIcon,
+  closeIcon,
+  heartIcon,
 };

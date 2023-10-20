@@ -1,0 +1,22 @@
+.optionImageContainer {
+  flex-grow: 1;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.optionImage {
+  height: 140px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0 0 15px;
+}
+
+.optionTextContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
