@@ -13,6 +13,7 @@ function Login() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
 
   /* Manejo de clicks */
   const handleMode = () => {
@@ -63,9 +64,14 @@ function Login() {
         )}
 
         <StyledInput
-          placeholder="Email o usuario"
+          placeholder="Email"
           value={email}
           setValue={setEmail}
+        />
+        <StyledInput
+          placeholder="Usuario"
+          value={user}
+          setValue={setUser}
         />
         <StyledInput
           placeholder="Contraseña"
