@@ -32,7 +32,6 @@ const ButtonContainer = styled.div`
     props.buttonStyle ? props.buttonStyle.minWidth || "auto" : "auto"};
   height: ${(props) =>
     (props.buttonStyle && props.buttonStyle.height) || "auto"};
-
   margin-top: ${(props) =>
     props.buttonStyle ? props.buttonStyle.marginTop || "0" : "0"};
   background-color: ${(props) =>

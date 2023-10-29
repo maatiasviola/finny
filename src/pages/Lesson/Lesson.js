@@ -3,9 +3,11 @@ import styles from "./Lesson.module.css";
 import { icons } from "../../assets/icons";
 import PressableButton from "../../components/PressableButton/PressableButton";
 import PressableImageOption from "../../components/PressableImageOption/PressableImageOption";
+import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
 function Lesson() {
   const [active, setActive] = useState("");
+  const [percentage,setPercentage]=useState(1);
 
   const handleOption = (idSelected) => {
     setActive(idSelected);
@@ -17,7 +19,7 @@ function Lesson() {
         <div className={styles.headerInner}>
           <div className={styles.headerItems}>
             <img className={styles.icon} src={icons.closeIcon} alt="Cerrar" />
-            <div className={styles.progressBar}></div>
+            <div className={styles.progressBar}><ProgressBar percentage={percentage}/></div>
             <div className={styles.lifesContainer}>
               <img src={icons.heartIcon} className={styles.heart} alt="Vidas" />
               <span className={styles.heartText}>5</span>

@@ -3,10 +3,19 @@ import styled from "styled-components";
 import PressableButton from "../PressableButton/PressableButton";
 import { icons } from "../../assets/icons";
 
-function Nivel() {
+function Nivel({idNivel,left}) {
+  const StyledDiv = styled.div`
+  margin-bottom: 0px;
+  margin-top: 20px;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  left: ${left};
+`;
   return (
     <StyledDiv>
       <PressableButton
+        onClick={() => {window.location=`/lesson?idNivel=${idNivel}`;}}
         icon={icons.starIcon}
         iconStyle={{
           width: "42px",
@@ -22,6 +31,7 @@ function Nivel() {
           borderRadius: "50%",
           width: "70px",
           height: "65px",
+          position:"relative"
         }}
       />
     </StyledDiv>
@@ -30,10 +40,4 @@ function Nivel() {
 
 export default Nivel;
 
-const StyledDiv = styled.div`
-  margin-bottom: 0px;
-  margin-top: 67px;
-  display: flex;
-  position: relative;
-  cursor: pointer;
-`;
+

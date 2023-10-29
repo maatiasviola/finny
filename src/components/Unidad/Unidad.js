@@ -6,6 +6,25 @@ import { icons } from "../../assets/icons";
 import Nivel from "../Nivel/Nivel";
 
 function Unidad() {
+
+  const levels= Array(10).fill(
+    {
+      nivel:{
+        idNivel:"1",
+        juegos:[
+          {}
+        ],
+        lecciones:[
+          {}
+        ],
+      },
+      hecho:false
+    }
+    );
+
+  let actualLeft=11;
+  let flip=false;
+
   return (
     <div>
       <Seccion>
@@ -34,7 +53,22 @@ function Unidad() {
       </Seccion>
       {/* Seccion Niveles */}
       <div className={styles.nivelesContainer}>
-        <Nivel />
+        {levels.map((level) => {
+        if(actualLeft==11 || actualLeft==-11){
+          actualLeft=0;
+        }
+        else{
+          if(flip){
+            actualLeft=-11;
+            flip=false;
+          }
+          else{
+            actualLeft=11;
+            flip=true;
+          }
+        }
+        return (<Nivel idNivel={level.nivel.idNivel} left={`${actualLeft}vw`} />);})}
+        
       </div>
     </div>
   );
