@@ -1,0 +1,15 @@
+.optionImageContainer {
+  flex-grow: 1;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.optionTextContainer {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
