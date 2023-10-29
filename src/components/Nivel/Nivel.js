@@ -11,6 +11,7 @@ function Nivel({idNivel,left}) {
   position: relative;
   cursor: pointer;
   left: ${left};
+  z-index: 20;
 `;
   return (
     <StyledDiv>

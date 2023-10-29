@@ -17,7 +17,7 @@ export default PressableOption;
 
 const StyledOption = styled.div`
   display: flex;
-  padding: 20px;
+  padding: 2px;
   border-radius: 12px;
   border-style: solid;
   border-width: 2px 2px 4px;
