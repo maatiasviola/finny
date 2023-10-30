@@ -1,105 +1,76 @@
 import React, { useState } from "react";
 import styles from "./Lesson.module.css";
-import { icons } from "../../assets/icons";
+import { quizzes } from "../../constants/quizzes";
 import PressableButton from "../../components/PressableButton/PressableButton";
 import PressableImageOption from "../../components/PressableImageOption/PressableImageOption";
-import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import LessonHeader from "../../components/LessonHeader/LessonHeader";
+import ImageMultipleChoice from "../../components/ImageMultipleChoice/ImageMultipleChoice";
+import MultipleChoice from "../../components/MultipleChoice/MultipleChoice";
+import { icons } from "../../assets/icons";
+import styled from "styled-components";
+import LessonFooter from "../../components/LessonFooter/LessonFooter";
 
 function Lesson() {
-  const [active, setActive] = useState("");
-  const [percentage,setPercentage]=useState(1);
+  const [active, setActive] = useState(-1); // opcion elegida
+  const [lifes, setLifes] = useState(5); // vidas
+  const [percentage, setPercentage] = useState(48);
+
+  const [comprobar, setComprobar] = useState(true); // saber si hay que comprobar o continuar respuesta
+  const [estadoRespuesta, setEstadoRespuesta] = useState("");
 
   const handleOption = (idSelected) => {
     setActive(idSelected);
   };
+
+  const handleComprobar = () => {
+    // verificar si respuesta fue correcta
+    // si fue correcta o incorrecta hacer un setLifes +- 1
+    // verificar que vidas sea mayor que 0, sino se acabo el juego
+    // aumentar progress bar dependiendo de la respuesta
+    setEstadoRespuesta("incorrecta");
+    setComprobar(false);
+  };
+
+  const handleContinuar = () => {
+    // permite continuar con el juego
+    setEstadoRespuesta("");
+    setComprobar(true);
+  };
+
   return (
     <div className={styles.container}>
       {/* Header */}
-      <div className={styles.header}>
-        <div className={styles.headerInner}>
-          <div className={styles.headerItems}>
-            <img className={styles.icon} src={icons.closeIcon} alt="Cerrar" />
-            <div className={styles.progressBar}><ProgressBar percentage={percentage}/></div>
-            <div className={styles.lifesContainer}>
-              <img src={icons.heartIcon} className={styles.heart} alt="Vidas" />
-              <span className={styles.heartText}>5</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <LessonHeader lifes={lifes} percentage={percentage} />
 
       {/* Lesson */}
       <div className={styles.lessonContainer}>
         <div className={styles.lessonInnerContainer}>
           <div className={styles.lessonItemsContainer}>
-            {/* Question */}
-            <h1 className={styles.question}>
-              ¿Cual de estas es una inversión de alto riesgo?
-            </h1>
+            {/*  Image Multiple Choice ejemplo
+                        
+            <ImageMultipleChoice
+              quiz={quizzes[0]}
+              handleOption={handleOption}
+              active={active}
+            />
+            */}
 
-            {/* Options */}
-            <div className={styles.optionsContainer}>
-              <div className={styles.optionsInnerContainer}>
-                <PressableImageOption
-                  image={icons.letraTesoroIcon}
-                  text="Letra tesoro de USA"
-                  number="1"
-                  onClick={() => handleOption("1")}
-                  active={active === "1"}
-                />
-
-                <PressableImageOption
-                  image={icons.teslaIcon}
-                  text="Una accion de Tesla"
-                  number="2"
-                  onClick={() => handleOption("2")}
-                  active={active === "2"}
-                />
-
-                <PressableImageOption
-                  image={icons.casaIcon}
-                  text="Una propiedad"
-                  number="3"
-                  onClick={() => handleOption("3")}
-                  active={active === "3"}
-                />
-              </div>
-            </div>
+            <MultipleChoice
+              quiz={quizzes[1]}
+              handleOption={handleOption}
+              active={active}
+            />
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className={styles.footerContainer}>
-        <div className={styles.footerInnerContainer}>
-          {/* SALTAR */}
-          <div className={styles.saltarContainer}>
-            <PressableButton
-              text="Saltar"
-              buttonStyle={{
-                backgroundColor: "#ffffff",
-                borderWidth: "2px",
-                borderStyle: "solid",
-                borderColor: "#e1e1e1",
-                boxShadow: "0px 2px 0px 0px #e1e1e1",
-                height: "30px",
-                minWidth: "150px",
-              }}
-              textStyle={{
-                color: "#a6a6a6",
-              }}
-            />
-          </div>
-
-          {/* COMPROBAR */}
-          <div className={styles.comprobarContainer}>
-            <PressableButton
-              text="Comprobar"
-              buttonStyle={{ height: "30px", minWidth: "150px" }}
-            />
-          </div>
-        </div>
-      </div>
+      <LessonFooter
+        estadoRespuesta={estadoRespuesta}
+        buttonText={comprobar ? "Comprobar" : "Continuar"}
+        onClick={comprobar ? handleComprobar : handleContinuar}
+        solucionCorrecta={quizzes[1].opciones[quizzes[1].respuestaCorrecta]}
+      />
     </div>
   );
 }

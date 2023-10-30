@@ -25,6 +25,10 @@ const letraTesoroIcon = require("./icons/letraTesoro.png");
 // Icons
 const closeIcon = require("./icons/close.png");
 const heartIcon = require("./icons/heart.png");
+const checkIcon = require("./icons/check.png");
+const errorIcon = require("./icons/error.png");
+const greenFlagIcon = require("./icons/greenFlag.png");
+const redFlagIcon = require("./icons/redFlag.png");
 
 export const icons = {
   googleIcon,
@@ -43,4 +47,8 @@ export const icons = {
   letraTesoroIcon,
   closeIcon,
   heartIcon,
+  checkIcon,
+  errorIcon,
+  greenFlagIcon,
+  redFlagIcon,
 };

@@ -1,0 +1,105 @@
+.footerInnerContainer {
+  align-items: center;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 100%;
+  justify-content: space-between;
+  grid-gap: 8px 16px;
+  display: grid;
+  justify-items: stretch;
+  padding: 0 40px;
+  width: 100%;
+}
+
+.saltarContainer {
+  grid-column: auto/2;
+  justify-self: start;
+}
+
+.comprobarContainer {
+  grid-column: 5 / auto;
+  justify-self: end;
+}
+
+.respuestaValidadaContainer {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1/5;
+  justify-content: center;
+  margin: 0;
+  min-height: 140px;
+  padding: 16px 0;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.respuestaValidadaInner {
+  grid-template-columns: min-content 1fr;
+  grid-gap: 16px;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.iconRespuestaValidadaContainer {
+  align-self: center;
+  background: #ffffff;
+  border-radius: 98px;
+  display: block;
+  float: left;
+  height: 80px;
+  width: 80px;
+  opacity: 1;
+}
+
+.respuestaValidadaInfoContainer {
+  align-items: center;
+  grid-auto-flow: row;
+  grid-gap: 16px;
+  display: grid;
+  justify-content: space-between;
+  padding: 0;
+  width: 100%;
+}
+
+.respuestaValidadaInfoContainerTexto {
+  grid-gap: 16px;
+  min-width: 320px;
+  grid-gap: 0;
+  line-height: 26px;
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.reportarContainer {
+  justify-self: start;
+  align-self: center;
+  grid-gap: 24px;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.reportarButton {
+  color: #59a700;
+  opacity: 0.7;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  line-height: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.reportarContainerInner {
+  grid-gap: 5px;
+  display: grid;
+  grid-auto-flow: column;
+  line-height: normal !important;
+}
+
+.solucionCorrecta {
+  font-size: 17px;
+  font-weight: 500 !important;
+  color: #ea2b2b;
+}

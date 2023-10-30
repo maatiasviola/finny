@@ -1,0 +1,14 @@
+.container {
+  background-color: #e5e5e5;
+  border-radius: 8px;
+  position: relative;
+}
+
+.progressBar {
+  opacity: 1;
+  border-radius: inherit;
+  color: #58cb02;
+  height: 16px;
+  position: relative;
+  width: 100%;
+}

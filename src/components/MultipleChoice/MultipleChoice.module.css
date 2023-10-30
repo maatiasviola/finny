@@ -1,0 +1,23 @@
+.question {
+  text-align: left;
+  color: #3c3c3c;
+  font-family: Inter;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px; /* 142.857% */
+}
+
+.optionsContainer {
+  grid-template-rows: min-content 1fr;
+  align-content: start;
+  display: grid;
+  text-align: initial;
+}
+
+.optionsInnerContainer {
+  grid-template-columns: 1fr;
+  grid-gap: 8px;
+  display: grid;
+  align-self: start;
+}
