@@ -1,7 +1,7 @@
 import PressableMultipleChoiceOption from "../PressableMultipleChoiceOption/PressableMultipleChoiceOption";
 import styles from "./MultipleChoice.module.css";
 
-function MultipleChoice({ quiz, handleOption, active }) {
+function MultipleChoice({ quiz, handleOpcion, active }) {
   return (
     <>
       {/* Question */}
@@ -10,12 +10,13 @@ function MultipleChoice({ quiz, handleOption, active }) {
       {/* Options */}
       <div className={styles.optionsContainer}>
         <div className={styles.optionsInnerContainer}>
-          {quiz.opciones.map((opcion, index) => (
+          {quiz.opciones.map((opcion) => (
             <PressableMultipleChoiceOption
-              text={opcion}
-              number={index}
-              onClick={() => handleOption(index)}
-              active={active === index}
+              key={opcion.idOpcion}
+              text={opcion.texto}
+              number={opcion.idOpcion}
+              onClick={() => handleOpcion(opcion.idOpcion)}
+              active={active === opcion.idOpcion}
             />
           ))}
         </div>

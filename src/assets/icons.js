@@ -21,6 +21,15 @@ const starIcon = require("./icons/starIcon.png");
 const casaIcon = require("./icons/casa.png");
 const teslaIcon = require("./icons/tesla.png");
 const letraTesoroIcon = require("./icons/letraTesoro.png");
+const cocaColaIcon = require("./icons/cocaCola.png");
+const colchonUSDIcon = require("./icons/colchonUSD.png");
+const cajaFuerteIcon = require("./icons/cajaFuerte.png");
+const bonosIcon = require("./icons/bonos.png");
+const plazoFijoIcon = require("./icons/plazoFijo.png");
+const bitcoinIcon = require("./icons/bitcoin.png");
+const analisisFundamentalIcon = require("./icons/analisisFundamental.png");
+const dojiIcon = require("./icons/doji.png");
+const tendenciaIcon = require("./icons/tendencia.png");
 
 // Icons
 const closeIcon = require("./icons/close.png");
@@ -51,4 +60,13 @@ export const icons = {
   errorIcon,
   greenFlagIcon,
   redFlagIcon,
+  cocaColaIcon,
+  colchonUSDIcon,
+  cajaFuerteIcon,
+  bonosIcon,
+  plazoFijoIcon,
+  bitcoinIcon,
+  analisisFundamentalIcon,
+  dojiIcon,
+  tendenciaIcon,
 };

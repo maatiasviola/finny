@@ -1,41 +1,82 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Lesson.module.css";
 import { quizzes } from "../../constants/quizzes";
-import PressableButton from "../../components/PressableButton/PressableButton";
-import PressableImageOption from "../../components/PressableImageOption/PressableImageOption";
 import LessonHeader from "../../components/LessonHeader/LessonHeader";
 import ImageMultipleChoice from "../../components/ImageMultipleChoice/ImageMultipleChoice";
 import MultipleChoice from "../../components/MultipleChoice/MultipleChoice";
-import { icons } from "../../assets/icons";
-import styled from "styled-components";
+
 import LessonFooter from "../../components/LessonFooter/LessonFooter";
 
 function Lesson() {
   const [active, setActive] = useState(-1); // opcion elegida
   const [lifes, setLifes] = useState(5); // vidas
-  const [percentage, setPercentage] = useState(48);
+  const [percentage, setPercentage] = useState(0);
 
+  const [preguntas, setPreguntas] = useState([]);
+  const [preguntasFalladas, setPreguntasFalladas] = useState([]); // array de posiciones
+  const [preguntaActual, setPreguntaActual] = useState(0);
+  const [rondaFalladas, setRondaFalladas] = useState(false);
+
+  const [contadorAcertadas, setContadorAcertadas] = useState(0);
   const [comprobar, setComprobar] = useState(true); // saber si hay que comprobar o continuar respuesta
   const [estadoRespuesta, setEstadoRespuesta] = useState("");
 
-  const handleOption = (idSelected) => {
+  useEffect(() => {
+    setPreguntas(quizzes);
+  }, []);
+
+  const handleOpcion = (idSelected) => {
     setActive(idSelected);
   };
 
+  const handleSiguientePregunta = () => {
+    setPreguntaActual(preguntaActual + 1);
+
+    if (preguntaActual === preguntas.length - 1 || rondaFalladas) {
+      if (!rondaFalladas) {
+        setRondaFalladas(true);
+      }
+      const numeroAleatorio = Math.floor(
+        Math.random() * preguntasFalladas.length
+      );
+      setPreguntaActual(preguntasFalladas[numeroAleatorio]);
+      let nuevasPreguntasFalladas = preguntasFalladas.filter(
+        (pregunta) => pregunta !== preguntasFalladas[numeroAleatorio]
+      );
+      setPreguntasFalladas(nuevasPreguntasFalladas);
+    }
+  };
+
   const handleComprobar = () => {
-    // verificar si respuesta fue correcta
-    // si fue correcta o incorrecta hacer un setLifes +- 1
-    // verificar que vidas sea mayor que 0, sino se acabo el juego
-    // aumentar progress bar dependiendo de la respuesta
-    setEstadoRespuesta("incorrecta");
+    let respuestaCorrecta = preguntas[preguntaActual].respuestaCorrecta;
+
+    if (respuestaCorrecta === active) {
+      setContadorAcertadas(contadorAcertadas + 1);
+      setEstadoRespuesta("correcta");
+    } else {
+      setPreguntasFalladas([...preguntasFalladas, preguntaActual]);
+      setLifes(lifes - 1);
+      setEstadoRespuesta("incorrecta");
+    }
+
     setComprobar(false);
   };
 
   const handleContinuar = () => {
+    // verificar que vidas sea mayor que 0, sino se acabo el juego
+    // aumentar progress bar dependiendo de la respuesta
     // permite continuar con el juego
+    let progreso = (contadorAcertadas * 100) / preguntas.length;
+    setPercentage(progreso);
+    handleSiguientePregunta();
+    setActive(-1);
     setEstadoRespuesta("");
     setComprobar(true);
   };
+
+  if (preguntas.length === 0) {
+    return <></>;
+  }
 
   return (
     <div className={styles.container}>
@@ -46,20 +87,27 @@ function Lesson() {
       <div className={styles.lessonContainer}>
         <div className={styles.lessonInnerContainer}>
           <div className={styles.lessonItemsContainer}>
-            {/*  Image Multiple Choice ejemplo
-                        
-            <ImageMultipleChoice
-              quiz={quizzes[0]}
-              handleOption={handleOption}
-              active={active}
-            />
-            */}
-
-            <MultipleChoice
-              quiz={quizzes[1]}
-              handleOption={handleOption}
-              active={active}
-            />
+            {percentage === 100 ? (
+              <>
+                <h1>Hola</h1>
+              </>
+            ) : (
+              <>
+                {preguntas[preguntaActual].tipo === 1 ? (
+                  <MultipleChoice
+                    quiz={preguntas[preguntaActual]}
+                    handleOpcion={handleOpcion}
+                    active={active}
+                  />
+                ) : (
+                  <ImageMultipleChoice
+                    quiz={preguntas[preguntaActual]}
+                    handleOpcion={handleOpcion}
+                    active={active}
+                  />
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -69,7 +117,11 @@ function Lesson() {
         estadoRespuesta={estadoRespuesta}
         buttonText={comprobar ? "Comprobar" : "Continuar"}
         onClick={comprobar ? handleComprobar : handleContinuar}
-        solucionCorrecta={quizzes[1].opciones[quizzes[1].respuestaCorrecta]}
+        solucionCorrecta={
+          preguntas[preguntaActual].opciones[
+            preguntas[preguntaActual].respuestaCorrecta
+          ].texto
+        }
       />
     </div>
   );

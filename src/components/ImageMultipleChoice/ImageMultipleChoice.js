@@ -1,7 +1,7 @@
 import PressableImageOption from "../PressableImageOption/PressableImageOption";
 import styles from "./ImageMultipleChoice.module.css";
 
-function ImageMultipleChoice({ quiz, active, handleOption }) {
+function ImageMultipleChoice({ quiz, active, handleOpcion }) {
   return (
     <>
       {/* Question */}
@@ -10,13 +10,14 @@ function ImageMultipleChoice({ quiz, active, handleOption }) {
       {/* Options */}
       <div className={styles.optionsContainer}>
         <div className={styles.optionsInnerContainer}>
-          {quiz.opciones.map((opcion, index) => (
+          {quiz.opciones.map((opcion) => (
             <PressableImageOption
+              key={opcion.idOpcion}
               image={opcion.imagen}
               text={opcion.texto}
-              number={index}
-              onClick={() => handleOption(index)}
-              active={active === index}
+              number={opcion.idOpcion}
+              onClick={() => handleOpcion(opcion.idOpcion)}
+              active={active === opcion.idOpcion}
             />
           ))}
         </div>
