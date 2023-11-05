@@ -6,85 +6,90 @@ import PressableButton from "../PressableButton/PressableButton";
 function LessonFooter({
   estadoRespuesta,
   buttonText,
+  handleSaltar,
   onClick,
   solucionCorrecta,
+  leccionTerminada,
 }) {
   return (
     <StyledFooterContainer estadoRespuesta={estadoRespuesta}>
       <div className={styles.footerInnerContainer}>
-        {estadoRespuesta === "" ? (
-          <>
-            {/* SALTAR */}
-            <div className={styles.saltarContainer}>
-              <PressableButton
-                text="Saltar"
-                buttonStyle={{
-                  backgroundColor: "#ffffff",
-                  borderWidth: "2px",
-                  borderStyle: "solid",
-                  borderColor: "#e1e1e1",
-                  boxShadow: "0px 2px 0px 0px #e1e1e1",
-                  height: "30px",
-                  minWidth: "150px",
-                }}
-                textStyle={{
-                  color: "#a6a6a6",
-                }}
-              />
-            </div>
-          </>
-        ) : (
-          <div className={styles.respuestaValidadaContainer}>
-            <div className={styles.respuestaValidadaInner}>
-              {/* Icon */}
-              <div className={styles.iconRespuestaValidadaContainer}>
-                <StyledValidacionIcon
-                  className={styles.iconRespuestaValidada}
-                  alt={estadoRespuesta}
-                  src={
-                    estadoRespuesta === "correcta"
-                      ? icons.checkIcon
-                      : icons.errorIcon
-                  }
-                  respuestaCorrecta={estadoRespuesta === "correcta"}
+        {!leccionTerminada &&
+          (estadoRespuesta === "" ? (
+            <>
+              {/* SALTAR */}
+              <div className={styles.saltarContainer}>
+                <PressableButton
+                  text="Saltar"
+                  onClick={handleSaltar}
+                  buttonStyle={{
+                    backgroundColor: "#ffffff",
+                    borderWidth: "2px",
+                    borderStyle: "solid",
+                    borderColor: "#e1e1e1",
+                    boxShadow: "0px 2px 0px 0px #e1e1e1",
+                    height: "30px",
+                    minWidth: "150px",
+                  }}
+                  textStyle={{
+                    color: "#a6a6a6",
+                  }}
                 />
               </div>
-              {/* Texto */}
-              <div className={styles.respuestaValidadaInfoContainer}>
-                {/* ¡Excelente! /  */}
-                <div className={styles.respuestaValidadaInfoContainerTexto}>
-                  <StyledTitle
+            </>
+          ) : (
+            <div className={styles.respuestaValidadaContainer}>
+              <div className={styles.respuestaValidadaInner}>
+                {/* Icon */}
+                <div className={styles.iconRespuestaValidadaContainer}>
+                  <StyledValidacionIcon
+                    className={styles.iconRespuestaValidada}
+                    alt={estadoRespuesta}
+                    src={
+                      estadoRespuesta === "correcta"
+                        ? icons.checkIcon
+                        : icons.errorIcon
+                    }
                     respuestaCorrecta={estadoRespuesta === "correcta"}
-                  >
-                    {estadoRespuesta === "correcta"
-                      ? "¡Excelente!"
-                      : "Solución correcta:"}
-                  </StyledTitle>
-                  {estadoRespuesta !== "correcta" && (
-                    <div className={styles.solucionCorrecta}>
-                      {solucionCorrecta}
-                    </div>
-                  )}
+                  />
                 </div>
-                {/* Reportar */}
-                <div className={styles.reportarContainer}>
-                  <div className={styles.reportarButton}>
-                    <div className={styles.reportarContainerInner}>
-                      <StyledReportarIcon
-                        respuestaCorrecta={estadoRespuesta === "correcta"}
-                      />
-                      <StyledReportarText
-                        respuestaCorrecta={estadoRespuesta === "correcta"}
-                      >
-                        Reportar
-                      </StyledReportarText>
+                {/* Texto */}
+                <div className={styles.respuestaValidadaInfoContainer}>
+                  {/* ¡Excelente! /  */}
+                  <div className={styles.respuestaValidadaInfoContainerTexto}>
+                    <StyledTitle
+                      respuestaCorrecta={estadoRespuesta === "correcta"}
+                    >
+                      {estadoRespuesta === "correcta"
+                        ? "¡Excelente!"
+                        : "Solución correcta:"}
+                    </StyledTitle>
+                    {estadoRespuesta !== "correcta" && (
+                      <div className={styles.solucionCorrecta}>
+                        {solucionCorrecta}
+                      </div>
+                    )}
+                  </div>
+                  {/* Reportar */}
+                  <div className={styles.reportarContainer}>
+                    <div className={styles.reportarButton}>
+                      <div className={styles.reportarContainerInner}>
+                        <StyledReportarIcon
+                          respuestaCorrecta={estadoRespuesta === "correcta"}
+                        />
+                        <StyledReportarText
+                          respuestaCorrecta={estadoRespuesta === "correcta"}
+                        >
+                          Reportar
+                        </StyledReportarText>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          ))}
+
         {/* COMPROBAR */}
         <div className={styles.comprobarContainer}>
           <PressableButton
@@ -93,9 +98,9 @@ function LessonFooter({
             buttonStyle={{
               height: "30px",
               minWidth: "150px",
-              backgroundColor: estadoRespuesta !== "correcta" && "#ff4b4b",
+              backgroundColor: estadoRespuesta === "incorrecta" && "#ff4b4b",
               boxShadow:
-                estadoRespuesta !== "correcta" && "0px 4px 0px 0px #ea2b2b",
+                estadoRespuesta === "incorrecta" && "0px 4px 0px 0px #ea2b2b",
             }}
           />
         </div>
@@ -109,7 +114,7 @@ export default LessonFooter;
 const StyledFooterContainer = styled.div`
   grid-column: 1;
   grid-row: 3;
-  z-index: 110;
+  z-index: 100;
   display: flex;
   bottom: 0;
   position: absolute;

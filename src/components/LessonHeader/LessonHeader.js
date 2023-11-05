@@ -3,12 +3,20 @@ import styles from "./LessonHeader.module.css";
 import { icons } from "../../assets/icons";
 
 function LessonHeader({ lifes, percentage }) {
+  const handleClose = () => {
+    window.location = `/`;
+  };
   return (
     <div className={styles.header}>
       <div className={styles.headerInner}>
         <div className={styles.headerItems}>
           {/* Close Button */}
-          <img className={styles.icon} src={icons.closeIcon} alt="Cerrar" />
+          <img
+            className={styles.icon}
+            src={icons.closeIcon}
+            onClick={handleClose}
+            alt="Cerrar"
+          />
 
           {/* Progress Bar */}
           <ProgressBar percentage={percentage} />

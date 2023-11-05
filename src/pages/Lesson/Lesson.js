@@ -6,11 +6,13 @@ import ImageMultipleChoice from "../../components/ImageMultipleChoice/ImageMulti
 import MultipleChoice from "../../components/MultipleChoice/MultipleChoice";
 
 import LessonFooter from "../../components/LessonFooter/LessonFooter";
+import LeccionTerminada from "../../components/LeccionTerminada/LeccionTerminada";
 
 function Lesson() {
   const [active, setActive] = useState(-1); // opcion elegida
   const [lifes, setLifes] = useState(5); // vidas
   const [percentage, setPercentage] = useState(0);
+  const [leccionTerminada, setLeccionTerminada] = useState(false);
 
   const [preguntas, setPreguntas] = useState([]);
   const [preguntasFalladas, setPreguntasFalladas] = useState([]); // array de posiciones
@@ -68,30 +70,49 @@ function Lesson() {
     // permite continuar con el juego
     let progreso = (contadorAcertadas * 100) / preguntas.length;
     setPercentage(progreso);
-    handleSiguientePregunta();
+    if (progreso === 100) {
+      setLeccionTerminada(true);
+    }
+    !leccionTerminada && handleSiguientePregunta();
     setActive(-1);
     setEstadoRespuesta("");
     setComprobar(true);
   };
 
+  const handleFooterButton = () => {
+    if (leccionTerminada) {
+      window.location = `/`;
+    } else if (comprobar) {
+      handleComprobar();
+    } else {
+      handleContinuar();
+    }
+  };
+
+  const handleSaltar = () => {
+    setActive(-1);
+    setPreguntasFalladas([...preguntasFalladas, preguntaActual]);
+    !leccionTerminada && handleSiguientePregunta();
+  };
+
   if (preguntas.length === 0) {
-    return <></>;
+    return <></>; //loader
   }
 
   return (
     <div className={styles.container}>
       {/* Header */}
-      <LessonHeader lifes={lifes} percentage={percentage} />
+      {!leccionTerminada && (
+        <LessonHeader lifes={lifes} percentage={percentage} />
+      )}
 
       {/* Lesson */}
       <div className={styles.lessonContainer}>
         <div className={styles.lessonInnerContainer}>
           <div className={styles.lessonItemsContainer}>
-            {percentage === 100 ? (
-              <>
-                <h1>Hola</h1>
-              </>
-            ) : (
+            {/* Finished Lesson */}
+            {leccionTerminada && <LeccionTerminada />}
+            {!leccionTerminada && (
               <>
                 {preguntas[preguntaActual].tipo === 1 ? (
                   <MultipleChoice
@@ -115,12 +136,16 @@ function Lesson() {
       {/* Footer */}
       <LessonFooter
         estadoRespuesta={estadoRespuesta}
-        buttonText={comprobar ? "Comprobar" : "Continuar"}
-        onClick={comprobar ? handleComprobar : handleContinuar}
+        leccionTerminada={leccionTerminada}
+        buttonText={leccionTerminada || !comprobar ? "Continuar" : "Comprobar"}
+        onClick={handleFooterButton}
+        handleSaltar={handleSaltar}
         solucionCorrecta={
-          preguntas[preguntaActual].opciones[
-            preguntas[preguntaActual].respuestaCorrecta
-          ].texto
+          !leccionTerminada
+            ? preguntas[preguntaActual].opciones[
+                preguntas[preguntaActual].respuestaCorrecta
+              ].texto
+            : ""
         }
       />
     </div>

@@ -38,6 +38,8 @@ const checkIcon = require("./icons/check.png");
 const errorIcon = require("./icons/error.png");
 const greenFlagIcon = require("./icons/greenFlag.png");
 const redFlagIcon = require("./icons/redFlag.png");
+const xpIcon = require("./icons/xp.png");
+const targetIcon = require("./icons/target.png");
 
 export const icons = {
   googleIcon,
@@ -69,4 +71,6 @@ export const icons = {
   analisisFundamentalIcon,
   dojiIcon,
   tendenciaIcon,
+  xpIcon,
+  targetIcon,
 };

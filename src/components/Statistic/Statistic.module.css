@@ -1,0 +1,37 @@
+.container {
+  width: 163px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  z-index: -2;
+  background-color: #ffffff;
+}
+
+.label {
+  animation: aparicionTitulo 0.2s ease-in-out;
+  color: #ffffff;
+  font-size: 13px;
+  font-family: din-round, sans-serif;
+  outline: none;
+  font-weight: 700;
+  line-height: 16px;
+  padding: 5px 0;
+  text-transform: uppercase;
+  width: auto;
+  text-align: center;
+}
+
+@keyframes aparicionTitulo {
+  0%,
+  50% {
+    transform: translateY(30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.icon {
+  margin-right: 8px;
+  width: 18px;
+}
