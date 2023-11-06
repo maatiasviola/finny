@@ -7,6 +7,7 @@ import MultipleChoice from "../../components/MultipleChoice/MultipleChoice";
 
 import LessonFooter from "../../components/LessonFooter/LessonFooter";
 import LeccionTerminada from "../../components/LeccionTerminada/LeccionTerminada";
+import Chatbot from "../../components/Chatbot/Chatbot";
 
 function Lesson() {
   const [active, setActive] = useState(-1); // opcion elegida
@@ -109,6 +110,7 @@ function Lesson() {
       {/* Lesson */}
       <div className={styles.lessonContainer}>
         <div className={styles.lessonInnerContainer}>
+          <Chatbot />
           <div className={styles.lessonItemsContainer}>
             {/* Finished Lesson */}
             {leccionTerminada && <LeccionTerminada />}

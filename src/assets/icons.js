@@ -33,6 +33,8 @@ const tendenciaIcon = require("./icons/tendencia.png");
 
 // Icons
 const closeIcon = require("./icons/close.png");
+const sendIcon = require("./icons/send.png");
+const blackcloseIcon = require("./icons/blackCloseIcon.png");
 const heartIcon = require("./icons/heart.png");
 const checkIcon = require("./icons/check.png");
 const errorIcon = require("./icons/error.png");
@@ -40,6 +42,7 @@ const greenFlagIcon = require("./icons/greenFlag.png");
 const redFlagIcon = require("./icons/redFlag.png");
 const xpIcon = require("./icons/xp.png");
 const targetIcon = require("./icons/target.png");
+const warrenBuffetIcon = require("./icons/warrenBuffet.png");
 
 export const icons = {
   googleIcon,
@@ -73,4 +76,7 @@ export const icons = {
   tendenciaIcon,
   xpIcon,
   targetIcon,
+  warrenBuffetIcon,
+  blackcloseIcon,
+  sendIcon,
 };

@@ -1,3 +1,9 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
 .homeContainer {
   display: flex;
   gap: 30px;
