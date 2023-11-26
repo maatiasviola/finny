@@ -21,4 +21,4 @@ jobs:
         aws-region: us-east-1
 
     - name: Clear S3 Bucket
-      run: aws s3 rm s3://arn:aws:s3:::finny-app-logs --recursive
+      run: aws s3 rm s3://finny-app-logs --recursive
