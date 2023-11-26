@@ -24,8 +24,12 @@ jobs:
 
     - name: Build
       run: npm run build
-    - name: Configure AWS Credentials
-      run: echo "[default]\naws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}\naws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" > ~/.aws/credentials
+    - name: Set Up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
     - name: Clear Bucket
       run: aws s3 rm s3://finny-app-logs --recursive
       env:
