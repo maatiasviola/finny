@@ -16,8 +16,8 @@ jobs:
     - name: Set Up AWS CLI
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: AKIATWCEPH6F6WIQEKYD
-        aws-secret-access-key: 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
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
     - name: Clear S3 Bucket
