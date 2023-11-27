@@ -1,0 +1,25 @@
+/* ImageWithText.css */
+.image-with-text-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .image-container {
+    margin-right: 10px;
+  }
+  
+  .image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .text-container {
+    color: #333; 
+  }
+  
+  .progress-bar {
+    width: 100%;
+  }
+  
+
+  

@@ -3,3 +3,50 @@
   padding: 0;
   font-family: "DINRoundPro", sans-serif;
 }
+.right {
+  background-color: #4caf50; 
+  color: white;
+  float: right;
+  border-bottom-right-radius: 0;
+}
+.right img{
+  display: none;
+}
+
+.left {
+  background-color: #e0e0e0; 
+  color: black;
+  float: left;
+  border-bottom-left-radius: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.left img{
+  width: 50px;
+  height: 50px;
+  border-radius: 20px;
+  
+}
+
+.right, .left {
+  max-width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+  line-height: 1.4;
+}
+.switch-modal{
+  z-index: 150;
+  background-color: rgb(181, 181, 181);
+  width: 280px;
+  height: 50px;
+  position: absolute;
+  align-self: center;
+  top: 87px;
+  border-radius: 0px 15px 15px 15px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}

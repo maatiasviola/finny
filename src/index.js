@@ -5,7 +5,9 @@ import Login from "./pages/Login/Login";
 import "./index.css";
 import Home from "./pages/Home/Home";
 import Lesson from "./pages/Lesson/Lesson";
-//testing push to main
+
+import Profile from "./pages/Profile/Profile";
+
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/lesson",
     element: <Lesson />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 
