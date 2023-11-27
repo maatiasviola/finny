@@ -1,0 +1,59 @@
+.profileContainer {
+    display: flex;
+    align-items: flex-start;
+}
+
+.profileText {
+    margin-right: 20px; /* Agregado margen a la derecha para separar Estadisticas de Logros */
+    flex: 1; /* Para que ocupe el espacio restante en la fila */
+}
+
+.statsItem {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 200px; 
+}
+.userImage {
+    width: 100px; 
+    height: 100px; 
+    background-color: #ccc;
+    border-radius: 50%;
+    overflow: hidden; 
+}
+
+.profileImage {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+}
+.recuadrosContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recuadro {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 45%; 
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.recuadro h4 {
+    margin-bottom: 10px;
+}
+
+.recuadro img {
+    max-width: 100%;
+    max-height: 100px;
+}
+.grayBorder{
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%; 
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+}
