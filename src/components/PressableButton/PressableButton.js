@@ -8,11 +8,13 @@ function PressableButton({
   textStyle,
   iconStyle,
   onClick,
+  idNivel,
 }) {
   return (
     <ButtonContainer buttonStyle={buttonStyle} onClick={onClick}>
       {icon && <StyledImage iconStyle={iconStyle} src={icon} alt={text} />}
       {text && <ButtonText textStyle={textStyle}>{text}</ButtonText>}
+      {idNivel && <div style={{position:'absolute', fontWeight: "bolder", color:"#B100FF"}}>{idNivel}</div>}
     </ButtonContainer>
   );
 }

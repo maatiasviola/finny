@@ -4,7 +4,7 @@ import PressableButton from "../PressableButton/PressableButton";
 import { icons } from "../../assets/icons";
 
 function Nivel({idNivel,left}) {
-  const StyledDiv = styled.div`
+const StyledDiv = styled.div`
   margin-bottom: 0px;
   margin-top: 20px;
   display: flex;
@@ -18,6 +18,7 @@ function Nivel({idNivel,left}) {
       <PressableButton
         onClick={() => {window.location=`/lesson?idNivel=${idNivel}`;}}
         icon={icons.starIcon}
+        idNivel={idNivel}
         iconStyle={{
           width: "42px",
           height: "34px",

@@ -7,20 +7,23 @@ import Nivel from "../Nivel/Nivel";
 
 function Unidad() {
 
-  const levels= Array(10).fill(
-    {
-      nivel:{
-        idNivel:"1",
-        juegos:[
-          {}
-        ],
-        lecciones:[
-          {}
-        ],
-      },
-      hecho:false
-    }
+  const levels= [];
+  for(var i = 1; i<11;i++){
+    levels.push(
+      {
+        nivel:{
+          idNivel:i.toString(),
+          juegos:[
+            {}
+          ],
+          lecciones:[
+            {}
+          ],
+        },
+        hecho:false
+      }
     );
+  }
 
   let actualLeft=11;
   let beforeLeft=0;
@@ -79,16 +82,22 @@ function Unidad() {
             flip=true;
           }
         }
-        if(drawSvg){
-          return (<div><Nivel key={index} idNivel={level.nivel.idNivel} 
-            left={`${actualLeft}vw`} /><svg style={{position:"absolute",overflow:"visible",zIndex:10}}>
-              <line y1={`${actualTop-lineHeight}px`} x1={beforeLeft>=0 ? `${beforeLeft + 2}vw` : `${beforeLeft - 2 }vw`} y2={`${actualTop}px`} x2={actualLeft>=0 ? `${actualLeft+2}vw` : `${actualLeft-2}vw`} style={{stroke:"#CE82FF",strokeWidth:15}} /></svg></div>);  
+       if(drawSvg){
+          return (
+          <div>
+            <Nivel key={index} idNivel={level.nivel.idNivel} 
+            left={`${actualLeft}vw`} />
+            <svg style={{position:"absolute",overflow:"visible",zIndex:10}}>
+          {/* <line y1={`${actualTop-lineHeight}px`} x1={beforeLeft>=0 ? `${beforeLeft + 2}vw` : `${beforeLeft - 2 }vw`} y2={`${actualTop}px`} x2={actualLeft>=0 ? `${actualLeft+2}vw` : `${actualLeft-2}vw`} style={{stroke:"#CE82FF",strokeWidth:15}} /> */}
+          </svg>
+        </div>);  
         }
         else{
           return (<div><Nivel key={index} idNivel={level.nivel.idNivel} left={`${actualLeft}vw`} /></div>);
         }
         })}
-        
+       
+
       </div>
     </div>
   );

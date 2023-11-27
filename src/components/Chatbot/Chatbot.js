@@ -80,7 +80,9 @@ function Chatbot({ chatbotStyle }) {
         });
 
         const data = await response.json();
-        
+        if (data.status == "false"){
+          throw new Error();
+        }
         nuevasRespuestas.push({me:false, text: data.outputText});
 
         setRespuestas(nuevasRespuestas);

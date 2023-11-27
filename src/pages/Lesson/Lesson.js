@@ -58,6 +58,9 @@ function Lesson() {
       setEstadoRespuesta("correcta");
     } else {
       setPreguntasFalladas([...preguntasFalladas, preguntaActual]);
+      if (lifes == 0){
+        window.location.href = "/";
+      }
       setLifes(lifes - 1);
       setEstadoRespuesta("incorrecta");
     }
