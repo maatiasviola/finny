@@ -1,9 +1,8 @@
 name: Borrar Contenido de S3 Bucket
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   clear-s3-bucket:
