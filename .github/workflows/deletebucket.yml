@@ -1,9 +1,8 @@
 name: Borrar Contenido de S3 Bucket
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   clear-s3-bucket:
@@ -16,9 +15,9 @@ jobs:
     - name: Set Up AWS CLI
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: AKIATWCEPH6F6WIQEKYD
-        aws-secret-access-key: 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
-        aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
     - name: Clear S3 Bucket
       run: aws s3 rm s3://finny-app-logs --recursive
