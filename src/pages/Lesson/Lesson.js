@@ -59,7 +59,7 @@ function Lesson() {
     } else {
       setPreguntasFalladas([...preguntasFalladas, preguntaActual]);
       if (lifes == 0){
-        window.location.href = "/";
+        window.location.href = "/home";
       }
       setLifes(lifes - 1);
       setEstadoRespuesta("incorrecta");

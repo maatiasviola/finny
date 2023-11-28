@@ -23,7 +23,7 @@ function Header() {
         </div>
 
         {/* Avatar */}
-        <img className={styles.avatar} src={icons.avatarIcon} alt="Avatar" />
+        <img className={styles.avatar} src={icons.avatarIcon} alt="Avatar" onClick={()=> window.location.href = "/profile"}/>
       </div>
     </div>
   );

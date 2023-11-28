@@ -6,10 +6,16 @@ import { icons } from "../../assets/icons";
 function Navbar() {
   const [active, setActive] = useState("Aprender");
 
+  React.useEffect(()=>{
+    if (window.location.href.includes("profile")){
+      setActive("Perfil");
+    }
+  },[])
+
   return (
     <div className={styles.navbarContainer}>
       <NavbarItem
-        onClick={() => setActive("Aprender")}
+        onClick={() => {setActive("Aprender"); window.location.href="/home"}}
         active={active === "Aprender"}
         icon={icons.homeIcon}
         text="Aprender"
@@ -21,7 +27,7 @@ function Navbar() {
         text="Clasificación"
       />
       <NavbarItem
-        onClick={() => setActive("Perfil")}
+        onClick={() => {setActive("Perfil"); window.location.href="/profile"}}
         active={active === "Perfil"}
         icon={icons.userIcon}
         text="Mi Perfil"

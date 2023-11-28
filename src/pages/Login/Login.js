@@ -14,14 +14,25 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
-
+  const [redirecting, setRedirecting] = useState(false);
   /* Manejo de clicks */
   const handleMode = () => {
     mode === "login" ? setMode("registro") : setMode("login");
   };
 
   const handleLogin = () => {
-    console.log("login");
+
+    if(email == "agustin@mail.com" && user == "agustin" && password == "123"){
+      setRedirecting(true);
+      setTimeout(()=>{
+        setRedirecting(false);
+        window.location.href = "/home";
+      }, 8000)
+    }
+
+    
+
+    
   };
 
   const handleRegistro = () => {
@@ -29,7 +40,16 @@ function Login() {
   };
 
   return (
+    
     <div className={styles.container}>
+      <div style={{position:"absolute", width:"100%",height:"100%",backgroundColor:"rgb(230, 230, 230,0.2)", display: (redirecting?"flex":"none"), justifyContent: "center", alignItems:"center"}}>
+        <div style={{width: 400, height: 200, backgroundColor:"white", borderRadius:15, borderColor:"green", border: "1px solid green"}}>
+          <div style={{width:"100%",height:"100%",display: "flex", justifyContent: "center", alignItems:"center", flexDirection:"column"}}>
+            <h2 style={{textAlign:"center", color:"black"}}>Logueo satisfactorio</h2><br></br>
+            <h4 style={{textAlign:"center", color:"black"}}>redirigiendote a la home...</h4>
+          </div>
+        </div>
+      </div>
       <PressableButton
         text={mode === "login" ? "Registro" : "Ingresar"}
         onClick={handleMode}

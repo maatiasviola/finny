@@ -50,3 +50,11 @@
 b {
   font-weight: 700;
 }
+
+.alert-modal{
+  position: relative;
+  background-color: #3c3c3c;
+  width: 200px;
+  height: 100px;
+  z-index: 150;
+}

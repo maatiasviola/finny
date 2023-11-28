@@ -7,34 +7,41 @@ import ImageWithText from '../../components/achievements/Logros';
 
 const ProfileView = () => {
     return (
-        <div>
-            <h1>Jaime Jaimito</h1>
-            <p>Jaimito 205</p>
-            <div className={styles.userInfo}>
-                <div className={styles.userImage}>
-                    <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699113659/Avatar_jcqvt9.png" alt="Foto de perfil" className={styles.profileImage} />
+        <div style={{display:"flex", flexDirection:"column"}}>
+            <div style={{display:"flex", justifyContent:"space-evenly"}}>
+                <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+                    <h1>Jaime Jaimito</h1>
+                    <p>Jaimito 205</p>
                 </div>
-                <div className={styles.userInfoText}>
+                
+                <div className={styles.userInfo}>
+                    <div className={styles.userImage}>
+                        <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699113659/Avatar_jcqvt9.png" alt="Foto de perfil" className={styles.profileImage} />
+                    </div>
+                    <div className={styles.userInfoText}>
 
-                <PressableButton
-                        text="Editar Perfil"
-                        buttonStyle={{
-                            backgroundColor: '#007bff',
-                            borderRadius: '8px',
-                            marginRight: '10px',
-                            width: 'fit-content',  
-                            fontSize: '12px',     
-                        }}
-                        textStyle={{
-                            color: '#fff',
-                        }}
-                        onClick={() => {
-            
-                            console.log('Botón "Editar" presionado');
-                        }}
-                    />
+                    <PressableButton
+                            text="Editar Perfil"
+                            buttonStyle={{
+                                backgroundColor: '#007bff',
+                                borderRadius: '8px',
+                                marginRight: '10px',
+                                width: 'fit-content',  
+                                fontSize: '12px',     
+                            }}
+                            textStyle={{
+                                color: '#fff',
+                            }}
+                            onClick={() => {
+                
+                                console.log('Botón "Editar" presionado');
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
+            
+            
             <div style={{ borderTop: '1px solid #ccc', margin: '20px 0' }}></div>
             <div className={styles.profileContainer}>
                 <div className={styles.profileText}>
