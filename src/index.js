@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import "./index.css";
 import Home from "./pages/Home/Home";
 import Lesson from "./pages/Lesson/Lesson";
+
 import Profile from "./pages/Profile/Profile";
 
 const router = createBrowserRouter([
