@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import styles from "./Unidad.module.css";
 import PressableButton from "../PressableButton/PressableButton";
 import { icons } from "../../assets/icons";
 import Nivel from "../Nivel/Nivel";
+import { ip } from "../../constants/ip";
 
 function Unidad() {
 
-  const levels= [];
-  for(var i = 1; i<11;i++){
-    levels.push(
-      {
-        nivel:{
-          idNivel:i.toString(),
-          juegos:[
-            {}
-          ],
-          lecciones:[
-            {}
-          ],
-        },
-        hecho:false
-      }
-    );
+  const [levels,setLevels]=useState([]);
+
+  const usuario="juancito"; //CAMBIAR CUANDO ESTÉ TERMINADO EL LOGIN (TODO!!)
+
+  async function fetchUnidades(){
+    try {
+      console.log("Fetch unidades");
+
+      const response= await fetch(
+        ip+"/Home?usuarioEmail="+usuario,{
+          method:"GET",
+          mode:"cors"
+        }
+      );
+      const data= await response.json();
+      setLevels(await data.unidades);
+    } catch (error) {
+      console.log("Error en el fetch de las unidades");
+      console.log(error);
+    }
   }
+
+  React.useEffect(
+    () => {
+      fetchUnidades();
+    }
+  ,[]);
+
 
   let actualLeft=11;
   let beforeLeft=0;
@@ -32,14 +44,21 @@ function Unidad() {
   let drawSvg=true;
   let lineHeight=70;
 
+  console.log("Niveles");
+  console.log(levels);
+  let numeroNivel=0;
+
   return (
     <div>
+      {levels?.map((unidad,index) => {
+        return (
+      <div>
       <Seccion>
         {/* Seccion Heading */}
         <div className={styles.unidadInfo}>
-          <h1 className={styles.unidadTitulo}>Unidad 1</h1>
+          <h1 className={styles.unidadTitulo}>Unidad {unidad.numero}</h1>
           <span className={styles.unidadDescripcion}>
-            Tus primeros pasos en las inversiones
+            {unidad.subtitulo}
           </span>
         </div>
         <PressableButton
@@ -60,10 +79,10 @@ function Unidad() {
       </Seccion>
       {/* Seccion Niveles */}
       <div className={styles.nivelesContainer}>
-        {levels.map((level,index) => {
+        {unidad.niveles.map((level,index) => {
         beforeLeft=actualLeft;
         actualTop+=lineHeight;
-        if(index<levels.length-2){
+        if(index<unidad.niveles.length-2){
           drawSvg=true;
         }
         else{
@@ -82,23 +101,19 @@ function Unidad() {
             flip=true;
           }
         }
-       if(drawSvg){
-          return (
-          <div>
-            <Nivel key={index} idNivel={level.nivel.idNivel} 
-            left={`${actualLeft}vw`} />
-            <svg style={{position:"absolute",overflow:"visible",zIndex:10}}>
-          {/* <line y1={`${actualTop-lineHeight}px`} x1={beforeLeft>=0 ? `${beforeLeft + 2}vw` : `${beforeLeft - 2 }vw`} y2={`${actualTop}px`} x2={actualLeft>=0 ? `${actualLeft+2}vw` : `${actualLeft-2}vw`} style={{stroke:"#CE82FF",strokeWidth:15}} /> */}
-          </svg>
-        </div>);  
-        }
-        else{
-          return (<div><Nivel key={index} idNivel={level.nivel.idNivel} left={`${actualLeft}vw`} /></div>);
-        }
+
+        numeroNivel++;
+
+          return (<div><Nivel key={index} colorFondo={level.hecho ? "#58cc02" : "#CE82FF"} nivelAJugar={level.juegos} idNivel={numeroNivel} left={`${actualLeft}vw`} /></div>);
+
         })}
        
 
       </div>
+      </div>)
+      })
+      }
+
     </div>
   );
 }
