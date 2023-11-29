@@ -19,6 +19,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const [redirecting, setRedirecting] = useState(false);
+  document.title = "Finny - Login";
+  React.useEffect(()=>{
+    if(cookie.get("idPersona")){
+      
+      window.location.href = "/home";
+    }
+  },[])
   /* Manejo de clicks */
   const handleMode = () => {
     mode === "login" ? setMode("registro") : setMode("login");
@@ -40,7 +47,6 @@ function Login() {
       const status = await response.status;
       const idPersona = await response.json();
       if (status == 200){
-        
         cookie.set("idPersona",idPersona);
         // console.log(cookie.get("idPersona"))
         setRedirecting(true);

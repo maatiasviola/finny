@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import Lesson from "./pages/Lesson/Lesson";
 
 import Profile from "./pages/Profile/Profile";
+import Cookies from "universal-cookie";
 
 const router = createBrowserRouter([
   {

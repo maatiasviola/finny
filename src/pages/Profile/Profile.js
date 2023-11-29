@@ -6,6 +6,7 @@ import Cookies from "universal-cookie";
 
 import ProfiileView from "../../components/ProfileView/ProfileView";
 function Profile() {
+  document.title = "Finny - Profile";
   const cookie = new Cookies();
   React.useEffect(()=>{
     const cookieGetted = cookie.get("idPersona");

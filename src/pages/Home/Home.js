@@ -8,7 +8,7 @@ import Cookies from "universal-cookie";
 
 function Home() {
   const cookie = new Cookies();
-
+  document.title = "Finny - Home";
   React.useEffect(()=>{
     const cookieGetted = cookie.get("idPersona");
     if(!cookieGetted){
