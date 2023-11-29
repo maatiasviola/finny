@@ -1,17 +1,36 @@
 // ...
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./ProfileView.module.css";
 import PressableButton from '../../components/PressableButton/PressableButton';
 import ImageWithText from '../../components/achievements/Logros';
+import Cookies from 'universal-cookie';
 
 const ProfileView = () => {
+    const [persona, setPersona] = useState({});
+    const cookie = new Cookies();
+    React.useEffect(()=>{
+        const idPersona = cookie.get("idPersona");
+        fetch(`http://localhost:8080/Persona/getPersona/${idPersona}`,
+        {
+          method:"GET",
+          mode:"cors",
+          headers:{
+              "Content-Type":"application/json",
+              "Accept-Encoding":"gzip, deflate, br"
+          }
+      })
+      .then(r=>r.json())
+      .then(d=> setPersona(d));
+    },[])
+
+    console.log(persona);
     return (
         <div style={{display:"flex", flexDirection:"column"}}>
             <div style={{display:"flex", justifyContent:"space-evenly"}}>
                 <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                    <h1>Jaime Jaimito</h1>
-                    <p>Jaimito 205</p>
+                    <h1>{(persona)?persona.nombre:""}</h1>
+                    <p>{(persona)?persona.usuario:""}</p>
                 </div>
                 
                 <div className={styles.userInfo}>

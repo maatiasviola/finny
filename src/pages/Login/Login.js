@@ -4,7 +4,11 @@ import styles from "./Login.module.css";
 import PressableButton from "../../components/PressableButton/PressableButton";
 import LineDivider from "../../components/LineDivider/LineDivider";
 import { icons } from "../../assets/icons";
+import Cookies from 'universal-cookie';
+
 function Login() {
+  /* Cookies */
+  const cookie = new Cookies();
   /* Modo */
   const [mode, setMode] = useState("login");
 
@@ -20,14 +24,31 @@ function Login() {
     mode === "login" ? setMode("registro") : setMode("login");
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
 
-    if(email == "agustin@mail.com" && user == "agustin" && password == "123"){
-      setRedirecting(true);
-      setTimeout(()=>{
-        setRedirecting(false);
-        window.location.href = "/home";
-      }, 8000)
+    if(user != "" && password != "" && email != ""){
+      const response = await fetch("http://localhost:8080/Persona/Login",
+        {
+          method:"POST",
+          mode:"cors",
+          headers:{
+              "Content-Type":"application/json",
+              "Accept-Encoding":"gzip, deflate, br"
+          },
+          body: JSON.stringify({ usuario: user, email: email, contrasenia: password})  
+      }).catch(e=>console.log(e));
+      const status = await response.status;
+      const idPersona = await response.json();
+      if (status == 200){
+        cookie.set("idPersona",idPersona);
+        // console.log(cookie.get("idPersona"))
+        setRedirecting(true);
+        setTimeout(()=>{
+          setRedirecting(false);
+          window.location.href = "/home";
+        }, 8000);
+      }
+      
     }
 
     
@@ -35,8 +56,31 @@ function Login() {
     
   };
 
-  const handleRegistro = () => {
-    console.log("registro");
+  const handleRegistro = async () => {
+    if(user != "" && password != "" && email != "" && nombre != "" && edad>0){
+      const response = await fetch("http://localhost:8080/Persona/Registro",
+        {
+          method:"POST",
+          mode:"cors",
+          headers:{
+              "Content-Type":"application/json",
+              "Accept-Encoding":"gzip, deflate, br"
+          },
+          body: JSON.stringify({ usuario: user, contrasenia: password, edad:edad,nombre:nombre, email:email})  
+      }).catch(e=>console.log(e));
+      const status = await response.status;
+      const idPersona = await response.json();
+      if (status == 200){
+        cookie.set("idPersona",idPersona);
+        // console.log(cookie.get("idPersona"))
+        setRedirecting(true);
+        setTimeout(()=>{
+          setRedirecting(false);
+          window.location.href = "/home";
+        }, 8000);
+      }
+      
+    }
   };
 
   return (
