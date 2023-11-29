@@ -89,7 +89,7 @@ function Lesson() {
 
   const handleFooterButton = () => {
     if (leccionTerminada) {
-      window.location = `/`;
+      window.location = `/home`;
     } else if (comprobar) {
       handleComprobar();
     } else {

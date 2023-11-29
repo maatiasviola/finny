@@ -4,8 +4,18 @@ import Navbar from "../../components/Navbar/Navbar";
 import styles from "./Home.module.css";
 import Unidad from "../../components/Unidad/Unidad";
 import Chatbot from "../../components/Chatbot/Chatbot";
+import Cookies from "universal-cookie";
 
 function Home() {
+  const cookie = new Cookies();
+
+  React.useEffect(()=>{
+    const cookieGetted = cookie.get("idPersona");
+    if(!cookieGetted){
+      window.location.href = "/";
+    }
+  },[]);
+
   return (
     <div className={styles.container}>
       <Header />

@@ -5,17 +5,30 @@ import PressableButton from "../PressableButton/PressableButton";
 import { icons } from "../../assets/icons";
 import Nivel from "../Nivel/Nivel";
 import { ip } from "../../constants/ip";
-
+import Cookies from "universal-cookie";
 function Unidad() {
-
+  const [persona,setPersona] = useState(null);
   const [levels,setLevels]=useState([]);
-
-  const usuario="juancito"; //CAMBIAR CUANDO ESTÉ TERMINADO EL LOGIN (TODO!!)
-
+  const cookie = new Cookies();
+  const usuario=persona? persona.usuario : null; //CAMBIAR CUANDO ESTÉ TERMINADO EL LOGIN (TODO!!)
+  const [avoidLoop, setAvoidLoop] = useState(false);
+  async function fetchUsuario(){
+    const idPersona = cookie.get("idPersona");
+        await fetch(`http://localhost:8080/Persona/getPersona/${idPersona}`,
+        {
+          method:"GET",
+          mode:"cors",
+          headers:{
+              "Content-Type":"application/json",
+              "Accept-Encoding":"gzip, deflate, br"
+          }
+      })
+      .then(r=> r.json())
+      .then(d=> setPersona(d));
+  }
   async function fetchUnidades(){
     try {
       console.log("Fetch unidades");
-
       const response= await fetch(
         ip+"/Home?usuarioEmail="+usuario,{
           method:"GET",
@@ -29,12 +42,21 @@ function Unidad() {
       console.log(error);
     }
   }
+  
 
   React.useEffect(
     () => {
-      fetchUnidades();
+      
+      if(persona == null && !avoidLoop){
+        fetchUsuario();
+        setAvoidLoop(true);
+      }
+      if(persona!={} && avoidLoop){
+        fetchUnidades();
+        setAvoidLoop(false);
+      }
     }
-  ,[]);
+  ,[persona?persona:null]);
 
 
   let actualLeft=11;

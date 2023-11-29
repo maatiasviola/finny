@@ -40,14 +40,15 @@ function Login() {
       const status = await response.status;
       const idPersona = await response.json();
       if (status == 200){
+        
         cookie.set("idPersona",idPersona);
         // console.log(cookie.get("idPersona"))
         setRedirecting(true);
         setTimeout(()=>{
           setRedirecting(false);
           window.location.href = "/home";
-        }, 8000);
-      }
+        }, 5000);
+      } 
       
     }
 
@@ -77,7 +78,7 @@ function Login() {
         setTimeout(()=>{
           setRedirecting(false);
           window.location.href = "/home";
-        }, 8000);
+        }, 5000);
       }
       
     }
