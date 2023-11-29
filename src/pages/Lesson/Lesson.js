@@ -8,6 +8,7 @@ import MultipleChoice from "../../components/MultipleChoice/MultipleChoice";
 import LessonFooter from "../../components/LessonFooter/LessonFooter";
 import LeccionTerminada from "../../components/LeccionTerminada/LeccionTerminada";
 import Chatbot from "../../components/Chatbot/Chatbot";
+import { useLocation } from "react-router-dom";
 
 function Lesson() {
   const [active, setActive] = useState(-1); // opcion elegida
@@ -24,8 +25,11 @@ function Lesson() {
   const [comprobar, setComprobar] = useState(true); // saber si hay que comprobar o continuar respuesta
   const [estadoRespuesta, setEstadoRespuesta] = useState("");
 
+  const location=useLocation();
+
   useEffect(() => {
-    setPreguntas(quizzes);
+    setPreguntas(location.state.nivelAJugar);
+    console.log(location.state.nivelAJugar);
   }, []);
 
   const handleOpcion = (idSelected) => {
@@ -119,7 +123,7 @@ function Lesson() {
             {leccionTerminada && <LeccionTerminada />}
             {!leccionTerminada && (
               <>
-                {preguntas[preguntaActual].tipo === 1 ? (
+                {preguntas[preguntaActual].tipo === "MULTIPLECHOICE" ? (
                   <MultipleChoice
                     quiz={preguntas[preguntaActual]}
                     handleOpcion={handleOpcion}

@@ -14,7 +14,7 @@ function PressableButton({
     <ButtonContainer buttonStyle={buttonStyle} onClick={onClick}>
       {icon && <StyledImage iconStyle={iconStyle} src={icon} alt={text} />}
       {text && <ButtonText textStyle={textStyle}>{text}</ButtonText>}
-      {idNivel && <div style={{position:'absolute', fontWeight: "bolder", color:"#B100FF"}}>{idNivel}</div>}
+      {idNivel && <div style={{position:'absolute', fontWeight: "bolder", color:"black"}}>{idNivel}</div>}
     </ButtonContainer>
   );
 }
