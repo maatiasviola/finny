@@ -126,7 +126,7 @@ function Unidad() {
 
         numeroNivel++;
 
-          return (<div><Nivel key={index} colorFondo={level.hecho ? "#58cc02" : "#CE82FF"} nivelAJugar={level.juegos} idNivel={numeroNivel} left={`${actualLeft}vw`} /></div>);
+          return (<div><Nivel key={index} colorFondo={level.hecho ? "#58cc02" : "#CE82FF"} nivelAJugar={level.juegos} idNivel={level.idNivel} left={`${actualLeft}vw`} /></div>);
 
         })}
        

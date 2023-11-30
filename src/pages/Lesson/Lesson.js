@@ -9,6 +9,8 @@ import LessonFooter from "../../components/LessonFooter/LessonFooter";
 import LeccionTerminada from "../../components/LeccionTerminada/LeccionTerminada";
 import Chatbot from "../../components/Chatbot/Chatbot";
 import { useLocation } from "react-router-dom";
+import Cookies from "universal-cookie";
+import { ip } from "../../constants/ip";
 
 function Lesson() {
   const [active, setActive] = useState(-1); // opcion elegida
@@ -25,12 +27,50 @@ function Lesson() {
   const [comprobar, setComprobar] = useState(true); // saber si hay que comprobar o continuar respuesta
   const [estadoRespuesta, setEstadoRespuesta] = useState("");
 
+  const [puntos,setPuntos]=useState(0);
+  const [bien,setBien]=useState(0);
+  const [total,setTotal]=useState(0);
+  const [exp,setExp]=useState(0);
+
   const location=useLocation();
 
   useEffect(() => {
     setPreguntas(location.state.nivelAJugar);
+    setBien(location.state?.nivelAJugar?.length);
+    setTotal(location.state?.nivelAJugar?.length);
     console.log(location.state.nivelAJugar);
   }, []);
+
+  async function fetchPuntos(){
+    const cookie=new Cookies();
+    console.log("FETCHPUNTOS");
+    try {
+      fetch(ip+`/Persona/Puntaje`,
+      {
+        method:"POST",
+        mode:"cors",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          "idPersona":await cookie.get("idPersona"),
+          "idNivel":location.state.idNivel,
+          "puntaje":puntos
+        }
+        )
+      }).then((data) =>
+      {if(data.status!=200){
+        window.alert("Error en la subida de la puntuación");
+      }
+    else{
+      window.location = `/home`;
+    }})
+      
+    } catch (error) {
+      console.log("Error en la subida de puntos en Lesson.");
+      console.log(error);
+    }
+  }
 
   const handleOpcion = (idSelected) => {
     setActive(idSelected);
@@ -41,6 +81,7 @@ function Lesson() {
 
     if (preguntaActual === preguntas.length - 1 || rondaFalladas) {
       if (!rondaFalladas) {
+        setBien((bien/total)*100+"%");
         setRondaFalladas(true);
       }
       const numeroAleatorio = Math.floor(
@@ -59,8 +100,12 @@ function Lesson() {
 
     if (respuestaCorrecta === active) {
       setContadorAcertadas(contadorAcertadas + 1);
+      if(!rondaFalladas){setPuntos(puntos+preguntas[preguntaActual].puntosPosibles);}
       setEstadoRespuesta("correcta");
     } else {
+      if(!rondaFalladas){
+        setBien(bien-1);
+      }
       setPreguntasFalladas([...preguntasFalladas, preguntaActual]);
       if (lifes == 0){
         window.location.href = "/home";
@@ -79,6 +124,7 @@ function Lesson() {
     let progreso = (contadorAcertadas * 100) / preguntas.length;
     setPercentage(progreso);
     if (progreso === 100) {
+      setExp(puntos*5);
       setLeccionTerminada(true);
     }
     !leccionTerminada && handleSiguientePregunta();
@@ -89,7 +135,7 @@ function Lesson() {
 
   const handleFooterButton = () => {
     if (leccionTerminada) {
-      window.location = `/home`;
+      fetchPuntos();
     } else if (comprobar) {
       handleComprobar();
     } else {
@@ -120,7 +166,7 @@ function Lesson() {
           <Chatbot />
           <div className={styles.lessonItemsContainer}>
             {/* Finished Lesson */}
-            {leccionTerminada && <LeccionTerminada />}
+            {leccionTerminada && <LeccionTerminada exp={exp} bien={bien} />}
             {!leccionTerminada && (
               <>
                 {preguntas[preguntaActual].tipo === "MULTIPLECHOICE" ? (

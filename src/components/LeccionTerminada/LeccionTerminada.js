@@ -2,7 +2,7 @@ import { icons } from "../../assets/icons";
 import Statistic from "../Statistic/Statistic";
 import styles from "./LeccionTerminada.module.css";
 
-function LeccionTerminada() {
+function LeccionTerminada({exp,bien}) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
@@ -18,10 +18,10 @@ function LeccionTerminada() {
           <Statistic
             label="Exp totales"
             icon={icons.xpIcon}
-            value="12"
+            value={exp}
             color="#ffc800"
           />
-          <Statistic label="Bien" icon={icons.targetIcon} value="56%" />
+          <Statistic label="Bien" icon={icons.targetIcon} value={bien} />
         </div>
       </div>
     </div>

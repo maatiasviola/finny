@@ -18,7 +18,7 @@ const StyledDiv = styled.div`
   return (
     <StyledDiv>
       <PressableButton
-        onClick={() => {navigate("/lesson",{state:{nivelAJugar}});}}
+        onClick={() => {navigate("/lesson",{state:{nivelAJugar,idNivel}});}}
         icon={icons.starIcon}
         idNivel={idNivel}
         iconStyle={{
