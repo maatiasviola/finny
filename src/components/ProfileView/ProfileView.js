@@ -5,10 +5,19 @@ import styles from "./ProfileView.module.css";
 import PressableButton from '../../components/PressableButton/PressableButton';
 import ImageWithText from '../../components/achievements/Logros';
 import Cookies from 'universal-cookie';
+import styleInput from "../StyledInput/StyledInput.module.css";
+import StyledInput from '../StyledInput/StyledInput';
 
 const ProfileView = () => {
+    const [redirecting,setRedirecting] = useState(false);
     const [persona, setPersona] = useState({});
+    const [personaForUpdate, setPersonaForUpdate] = useState({});
+    const [nombre, setNombre] = useState("");
+    const [edad, setEdad] = useState(0);
+    const [email, setEmail] = useState("");
+    const [pass, setPass] = useState("");
     const cookie = new Cookies();
+    const [errorShow,setErrorShow] = useState(false);
     React.useEffect(()=>{
         const idPersona = cookie.get("idPersona");
         fetch(`http://localhost:8080/Persona/getPersona/${idPersona}`,
@@ -21,12 +30,107 @@ const ProfileView = () => {
           }
       })
       .then(r=>r.json())
-      .then(d=> setPersona(d));
+      .then(d=> {setPersona(d); setEdad(d.edad); setNombre(d.nombre); setEmail(d.email); setPass(d.contrasenia);});
     },[])
 
-    console.log(persona);
     return (
         <div style={{display:"flex", flexDirection:"column"}}>
+            <div style={{position:"absolute", top:0,left:0, width:"100%",height:"100%",backgroundColor:"rgb(230, 230, 230,0.2)", display: (redirecting?"flex":"none"), justifyContent: "center", alignItems:"center"}}>
+                <div style={{width: 400, height: 600, backgroundColor:"white", borderRadius:15, borderColor:"green", border: "1px solid green"}}>
+                <div style={{width:"100%",height:"100%",display: "flex", justifyContent: "space-evenly", alignItems:"center", flexDirection:"column"}}>
+                    <h1 style={{textAlign:"center", color:"black"}}>Editar Perfil</h1>
+                    <h2>{(persona)?persona.usuario:""}</h2><br></br>
+                    {(errorShow)?<h3>Error al actualizar los datos, reintente.</h3>:null}
+                    <p>Nombre</p>
+                    <input
+                        className={styleInput.input2}
+                        style={{borderColor:"black"}}
+                        placeholder={"Nombre"}
+                        value={nombre}
+                        onChange={(e) => {setNombre(e.target.value);}}
+                    />
+                    <p>Edad</p>
+                    <input
+                        className={styleInput.input2}
+                        style={{borderColor:"black"}}
+                        placeholder={"Edad"}
+                        value={edad}
+                        onChange={(e) => {setEdad(e.target.value);}}
+                    />
+                    <p>Email</p>
+                    <input
+                        className={styleInput.input2}
+                        style={{backgroundColor:"gray"}}
+                        placeholder={"Email"}
+                        value={email}
+                        onChange={(e) => {setEmail(e.target.value);}}
+                        disabled
+                    />
+                    <p>Contraseña</p>
+                    <input
+                        className={styleInput.input2}
+                        style={{borderColor:"black"}}
+                        placeholder={"Contraseña"}
+                        value={pass}
+                        onChange={(e) => {setPass(e.target.value);}}
+                    />
+                    <div style={{display:"flex", gap:10}}>
+                        <PressableButton
+                                text="CERRAR"
+                                buttonStyle={{
+                                    backgroundColor: '#DA0D0D',
+                                    borderRadius: '8px',
+                                    marginRight: '10px',
+                                    width: 'fit-content',  
+                                    fontSize: '12px',     
+                                }}
+                                textStyle={{
+                                    color: '#fff',
+                                }}
+                                onClick={async () => {
+                                    setErrorShow(false);
+                                    setRedirecting(false);                                
+                                }}
+                            />
+                        <PressableButton
+                            text="Actualizar"
+                            buttonStyle={{
+                                backgroundColor: '#007bff',
+                                borderRadius: '8px',
+                                marginRight: '10px',
+                                width: 'fit-content',  
+                                fontSize: '12px',     
+                            }}
+                            textStyle={{
+                                color: '#fff',
+                            }}
+                            onClick={async () => {
+                                const response = await fetch(`http://localhost:8080/Persona/Update`,
+                                {
+                                method:"PUT",
+                                mode:"cors",
+                                headers:{
+                                    "Content-Type":"application/json",
+                                    "Accept-Encoding":"gzip, deflate, br"
+                                },
+                                body: JSON.stringify({ usuario: persona.usuario, contrasenia: pass, edad:edad,nombre:nombre, email:email}) 
+                                })
+                                const status = await response.status;
+                                if(status == 200){
+                                    setErrorShow(false);
+                                    setRedirecting(false);
+                                    window.location.href = "/profile";
+                                }
+                                if (status == 400){
+                                    setErrorShow(true);
+                                }
+                                
+                            }}
+                        />
+                    </div>
+                </div>
+                </div>
+            </div>
             <div style={{display:"flex", justifyContent:"space-evenly"}}>
                 <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
                     <h1>{(persona)?persona.nombre:""}</h1>
@@ -53,7 +157,7 @@ const ProfileView = () => {
                             }}
                             onClick={() => {
                 
-                                console.log('Botón "Editar" presionado');
+                                setRedirecting(!redirecting);
                             }}
                         />
                     </div>
