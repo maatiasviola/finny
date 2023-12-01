@@ -1,0 +1,88 @@
+.cuerpo{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+     
+}
+.leaders{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
+}
+.rankingUno{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:center;
+}
+.rankingUno .imagen{
+    width: 70%;
+    height: 80%;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.rankingMenor .imagen{
+    width: 65%;
+    height: 75%;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.3);
+}
+.rankingMenor{
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.tabla{
+    height: 60%;
+    width: 100%;
+    
+}
+.puntuacion{
+    background-color: white;
+    width: 70%;
+    margin-left: 140px;
+    height: 20%;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+}
+.puntuacion .imagen{
+    width: 90px;
+    height: 82px;
+    margin-left: 15px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+.puntuacion .datos{
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+.datos p{
+    color: grey;
+}
+.datosPuntuacion{
+    display: flex;
+    flex-direction: row;
+}
+.puntuacion h1{
+    margin-left:310px;
+    margin-top: 35px;
+}
+.datosPuntuacion img{
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
+    margin-top: 32px;
+}

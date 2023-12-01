@@ -46,6 +46,7 @@ const warrenBuffetIcon = require("./icons/warrenBuffet.png");
 const kiyosaki = require("./icons/kiyosaki.png");
 const natoli = require("./icons/natoli.png");
 const save = require("./icons/save.png");
+const estrella =require ("./icons/Estrella_amarilla.png");
 export const icons = {
   googleIcon,
   facebookIcon,
@@ -83,5 +84,6 @@ export const icons = {
   sendIcon,
   kiyosaki,
   natoli,
-  save
+  save,
+  estrella
 };

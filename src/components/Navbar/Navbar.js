@@ -21,7 +21,7 @@ function Navbar() {
         text="Aprender"
       />
       <NavbarItem
-        onClick={() => setActive("Clasificacion")}
+        onClick={() => {setActive("Clasificacion");  window.location.href="/clasification"}}
         active={active === "Clasificacion"}
         icon={icons.leaderboardIcon}
         text="Clasificación"

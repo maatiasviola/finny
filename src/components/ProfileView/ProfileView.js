@@ -131,12 +131,7 @@ const ProfileView = () => {
                 </div>
                 </div>
             </div>
-            <div style={{display:"flex", justifyContent:"space-evenly"}}>
-                <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                    <h1>{(persona)?persona.nombre:""}</h1>
-                    <p>{(persona)?persona.usuario:""}</p>
-                </div>
-                
+            <div style={{display:"flex", justifyContent:"flex-start"}}>
                 <div className={styles.userInfo}>
                     <div className={styles.userImage}>
                         <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699113659/Avatar_jcqvt9.png" alt="Foto de perfil" className={styles.profileImage} />
@@ -162,6 +157,12 @@ const ProfileView = () => {
                         />
                     </div>
                 </div>
+                <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
+                    <h1>{(persona)?persona.nombre:""}</h1>
+                    <p>{(persona)?persona.usuario:""}</p>
+                </div>
+                
+                
             </div>
             
             
@@ -170,13 +171,22 @@ const ProfileView = () => {
                 <div className={styles.profileText}>
                     <h2>Estadisticas</h2>
                     <div className={styles.recuadrosContainer}>
-                        <div className={styles.recuadro}>
+                        <div className={styles.recuadroEstadistica}>
                             <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699114125/Vector_2_aqptul.png" alt="Foto fuego" />
-                            <h4>0 Rachá de días</h4>
+                                <div>
+                                <h4>0</h4>
+                                <h4>  Rachá de días</h4>
+                                </div>
+
                         </div>
-                        <div className={styles.recuadro}>
+                        <div className={styles.recuadroEstadistica}>
                             <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699114129/Icon_wy1q9u.png" alt="Foto rayo" />
-                            <h4> 22 Xp Total</h4>
+                            <div>
+                                <h4>22</h4>
+                                <h4>Xp Total</h4>
+
+                            </div>
+
                         </div>
                     </div>
                     <h3>Logros</h3>
