@@ -197,3 +197,21 @@ export const quizzes = [
     respuestaCorrecta: 1, // posicion en el array de opciones
   },
 ];
+
+export const coordenadasRuta = [
+  {
+    id: 1,
+    left: "0",
+    icono: icons.starIcon,
+  },
+  {
+    id: 2,
+    left: "-50px",
+    icono: icons.starIcon,
+  },
+  {
+    id: 3,
+    left: "50px",
+    icono: icons.starIcon,
+  },
+];

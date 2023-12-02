@@ -1,0 +1,35 @@
+.introContainer {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+.personajeImg {
+  width: 152px;
+  height: 138px;
+}
+
+.infoContainer {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.titulo {
+  color: #3c3c3c;
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px; /* 136.364% */
+}
+
+.descripcion {
+  color: #777;
+  font-family: Inter;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26.6px; /* 140% */
+}

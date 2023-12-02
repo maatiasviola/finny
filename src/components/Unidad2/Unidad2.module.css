@@ -1,0 +1,40 @@
+.container {
+  padding: 4px;
+  flex: 0.65;
+}
+
+/* Volver a la home */
+.headerContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.volverContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.volverIcon {
+  width: 17px;
+  height: 17px;
+}
+
+.volverText {
+  margin-left: 8px;
+  color: #afafaf;
+
+  font-family: Inter;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 105.263% */
+}
+
+.cambiarLeccionContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

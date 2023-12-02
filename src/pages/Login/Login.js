@@ -4,7 +4,7 @@ import styles from "./Login.module.css";
 import PressableButton from "../../components/PressableButton/PressableButton";
 import LineDivider from "../../components/LineDivider/LineDivider";
 import { icons } from "../../assets/icons";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 function Login() {
   /* Cookies */
@@ -20,84 +20,122 @@ function Login() {
   const [user, setUser] = useState("");
   const [redirecting, setRedirecting] = useState(false);
   document.title = "Finny - Login";
-  React.useEffect(()=>{
-    if(cookie.get("idPersona")){
-      
+  React.useEffect(() => {
+    if (cookie.get("idPersona")) {
       window.location.href = "/home";
     }
-  },[])
+  }, []);
   /* Manejo de clicks */
   const handleMode = () => {
     mode === "login" ? setMode("registro") : setMode("login");
   };
 
   const handleLogin = async () => {
-
-    if(user != "" && password != "" && email != ""){
-      const response = await fetch("http://localhost:8080/Persona/Login",
-        {
-          method:"POST",
-          mode:"cors",
-          headers:{
-              "Content-Type":"application/json",
-              "Accept-Encoding":"gzip, deflate, br"
-          },
-          body: JSON.stringify({ usuario: user, email: email, contrasenia: password})  
-      }).catch(e=>console.log(e));
+    if (user != "" && password != "" && email != "") {
+      const response = await fetch("http://localhost:8080/Persona/Login", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Encoding": "gzip, deflate, br",
+        },
+        body: JSON.stringify({
+          usuario: user,
+          email: email,
+          contrasenia: password,
+        }),
+      }).catch((e) => console.log(e));
       const status = await response.status;
       const idPersona = await response.json();
-      if (status == 200){
-        cookie.set("idPersona",idPersona);
+      if (status == 200) {
+        cookie.set("idPersona", idPersona);
         // console.log(cookie.get("idPersona"))
         setRedirecting(true);
-        setTimeout(()=>{
-          setRedirecting(false);
-          window.location.href = "/home";
-        }, 5000);
-      } 
-      
-    }
-
-    
-
-    
-  };
-
-  const handleRegistro = async () => {
-    if(user != "" && password != "" && email != "" && nombre != "" && edad>0){
-      const response = await fetch("http://localhost:8080/Persona/Registro",
-        {
-          method:"POST",
-          mode:"cors",
-          headers:{
-              "Content-Type":"application/json",
-              "Accept-Encoding":"gzip, deflate, br"
-          },
-          body: JSON.stringify({ usuario: user, contrasenia: password, edad:edad,nombre:nombre, email:email})  
-      }).catch(e=>console.log(e));
-      const status = await response.status;
-      const idPersona = await response.json();
-      if (status == 200){
-        cookie.set("idPersona",idPersona);
-        // console.log(cookie.get("idPersona"))
-        setRedirecting(true);
-        setTimeout(()=>{
+        setTimeout(() => {
           setRedirecting(false);
           window.location.href = "/home";
         }, 5000);
       }
-      
+    }
+  };
+
+  const handleRegistro = async () => {
+    if (
+      user != "" &&
+      password != "" &&
+      email != "" &&
+      nombre != "" &&
+      edad > 0
+    ) {
+      const response = await fetch("http://localhost:8080/Persona/Registro", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Encoding": "gzip, deflate, br",
+        },
+        body: JSON.stringify({
+          usuario: user,
+          contrasenia: password,
+          edad: edad,
+          nombre: nombre,
+          email: email,
+        }),
+      }).catch((e) => console.log(e));
+      const status = await response.status;
+      const idPersona = await response.json();
+      if (status == 200) {
+        cookie.set("idPersona", idPersona);
+        // console.log(cookie.get("idPersona"))
+        setRedirecting(true);
+        setTimeout(() => {
+          setRedirecting(false);
+          window.location.href = "/home";
+        }, 5000);
+      }
     }
   };
 
   return (
-    
     <div className={styles.container}>
-      <div style={{position:"absolute", width:"100%",height:"100%",backgroundColor:"rgb(230, 230, 230,0.2)", display: (redirecting?"flex":"none"), justifyContent: "center", alignItems:"center"}}>
-        <div style={{width: 400, height: 200, backgroundColor:"white", borderRadius:15, borderColor:"green", border: "1px solid green"}}>
-          <div style={{width:"100%",height:"100%",display: "flex", justifyContent: "center", alignItems:"center", flexDirection:"column"}}>
-            <h2 style={{textAlign:"center", color:"black"}}>Logueo satisfactorio</h2><br></br>
-            <h4 style={{textAlign:"center", color:"black"}}>redirigiendote a la home...</h4>
+      <div
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgb(230, 230, 230,0.2)",
+          display: redirecting ? "flex" : "none",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: 400,
+            height: 200,
+            backgroundColor: "white",
+            borderRadius: 15,
+            borderColor: "green",
+            border: "1px solid green",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <h2 style={{ textAlign: "center", color: "black" }}>
+              Logueo satisfactorio
+            </h2>
+            <br></br>
+            <h4 style={{ textAlign: "center", color: "black" }}>
+              redirigiendote a la home...
+            </h4>
           </div>
         </div>
       </div>
@@ -134,16 +172,8 @@ function Login() {
           </>
         )}
 
-        <StyledInput
-          placeholder="Email"
-          value={email}
-          setValue={setEmail}
-        />
-        <StyledInput
-          placeholder="Usuario"
-          value={user}
-          setValue={setUser}
-        />
+        <StyledInput placeholder="Email" value={email} setValue={setEmail} />
+        <StyledInput placeholder="Usuario" value={user} setValue={setUser} />
         <StyledInput
           placeholder="Contraseña"
           value={password}

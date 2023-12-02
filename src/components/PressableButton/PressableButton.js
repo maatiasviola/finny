@@ -14,7 +14,13 @@ function PressableButton({
     <ButtonContainer buttonStyle={buttonStyle} onClick={onClick}>
       {icon && <StyledImage iconStyle={iconStyle} src={icon} alt={text} />}
       {text && <ButtonText textStyle={textStyle}>{text}</ButtonText>}
-      {idNivel && <div style={{position:'absolute', fontWeight: "bolder", color:"black"}}>{idNivel}</div>}
+      {idNivel && (
+        <div
+          style={{ position: "absolute", fontWeight: "bolder", color: "black" }}
+        >
+          {idNivel}
+        </div>
+      )}
     </ButtonContainer>
   );
 }
@@ -26,6 +32,8 @@ const ButtonContainer = styled.div`
     props.buttonStyle ? props.buttonStyle.position || "initial" : "initial"};
   right: ${(props) =>
     props.buttonStyle ? props.buttonStyle.right || "initial" : "initial"};
+  left: ${(props) =>
+    props.buttonStyle ? props.buttonStyle.left || "initial" : "initial"};
   top: ${(props) =>
     props.buttonStyle ? props.buttonStyle.top || "initial" : "initial"};
   width: ${(props) =>
