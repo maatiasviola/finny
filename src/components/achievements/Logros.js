@@ -1,20 +1,30 @@
-import React from "react";
-import "./Logros.css";
-const ImageWithText = ({ imageUrl, text, achievementName, achievementProgress, streakText }) => {
+import styles from "./Logros.module.css";
+const Logro = ({ icon, title, description, achievementProgress }) => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div style={{ marginRight: '10px' }}>
-        <img src={imageUrl} alt="Incendio forestal" style={{ width: '50px', height: '50px' }} />
+    <div className={styles.logroContainer}>
+      {/* Logro image */}
+      <div className={styles.iconContainer}>
+        <img src={icon} alt={title} className={styles.logroIcon} />
+        <p className={styles.logroIconText}>Nivel 1</p>
       </div>
-      <div>
-        <h3>{achievementName}</h3>
-        <div>
-          <progress  value={achievementProgress} max="100"></progress>
-        </div>
-        <p>{streakText}</p>
+
+      {/* Logro Info */}
+      <div className={styles.logroInfoContainer}>
+        {/* Title */}
+        <span className={styles.logroTitle}>{title}</span>
+
+        {/* Progress bar */}
+        <div
+          value={achievementProgress}
+          max="100"
+          className={styles.progressBar}
+        />
+
+        {/* Description */}
+        <p className={styles.logroDescription}>{description}</p>
       </div>
     </div>
   );
 };
 
-export default ImageWithText;
+export default Logro;

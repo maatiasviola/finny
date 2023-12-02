@@ -17,7 +17,7 @@ const ImageTextContainer = ({ leftImage, rightImage, text }) => {
         </StyledText>
         {rightImage && <StyledRightImage src={rightImage} />}
       </StyledContainer>
-      ;
+
       <StyledLineDivider />
     </>
   );
@@ -59,4 +59,5 @@ const StyledLineDivider = styled.p`
   width: 100%;
   height: 4px;
   background: #e5e5e5;
+  margin: 10px 0;
 `;

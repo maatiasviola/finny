@@ -215,3 +215,39 @@ export const coordenadasRuta = [
     icono: icons.starIcon,
   },
 ];
+
+export const logros = [
+  {
+    idLogro: 0,
+    titulo: "Incendio forestal",
+    descripcion: "Alcanzá una racha de 3 dias",
+    icon: icons.logro1,
+  },
+  {
+    idLogro: 1,
+    titulo: "Sabio",
+    descripcion: "Obtené 100 XP",
+    icon: icons.logro2,
+  },
+  {
+    idLogro: 2,
+    titulo: "Erudito",
+    descripcion: "Termina tu primer modulo",
+    icon: icons.logro3,
+  },
+];
+
+export const amigos = [
+  {
+    idAmigo: 0,
+    titulo: "Encontrá amigos",
+    descripcion: "Busca a otros alumnos",
+    icon: icons.searchIcon,
+  },
+  {
+    idAmigo: 1,
+    titulo: "Invitá amigos",
+    descripcion: "¡Y diviertánse aprendiendo con Finny!",
+    icon: icons.warrenLeccion,
+  },
+];

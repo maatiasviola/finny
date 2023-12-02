@@ -6,28 +6,36 @@ import { icons } from "../../assets/icons";
 function Navbar() {
   const [active, setActive] = useState("Aprender");
 
-  React.useEffect(()=>{
-    if (window.location.href.includes("profile")){
+  React.useEffect(() => {
+    if (window.location.href.includes("profile")) {
       setActive("Perfil");
     }
-  },[])
+  }, []);
 
   return (
     <div className={styles.navbarContainer}>
       <NavbarItem
-        onClick={() => {setActive("Aprender"); window.location.href="/home"}}
+        onClick={() => {
+          setActive("Aprender");
+          window.location.href = "/home";
+        }}
         active={active === "Aprender"}
         icon={icons.homeIcon}
         text="Aprender"
       />
       <NavbarItem
-        onClick={() => {setActive("Clasificacion");  window.location.href="/clasification"}}
+        onClick={() => {
+          setActive("Clasificacion");
+        }}
         active={active === "Clasificacion"}
         icon={icons.leaderboardIcon}
         text="Clasificación"
       />
       <NavbarItem
-        onClick={() => {setActive("Perfil"); window.location.href="/profile"}}
+        onClick={() => {
+          setActive("Perfil");
+          window.location.href = "/profile";
+        }}
         active={active === "Perfil"}
         icon={icons.userIcon}
         text="Mi Perfil"

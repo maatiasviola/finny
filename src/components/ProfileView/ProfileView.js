@@ -1,255 +1,314 @@
-// ...
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import styles from "./ProfileView.module.css";
-import PressableButton from '../../components/PressableButton/PressableButton';
-import ImageWithText from '../../components/achievements/Logros';
-import Cookies from 'universal-cookie';
+import PressableButton from "../../components/PressableButton/PressableButton";
+import Logro from "../../components/achievements/Logros";
+import Cookies from "universal-cookie";
 import styleInput from "../StyledInput/StyledInput.module.css";
-import StyledInput from '../StyledInput/StyledInput';
+import StyledInput from "../StyledInput/StyledInput";
+import { icons } from "../../assets/icons";
+import StatContainer from "../StatContainer";
+import { amigos, logros } from "../../constants/quizzes";
+import AgregarAmigo from "../AgregarAmigo/AgregarAmigo";
 
 const ProfileView = () => {
-    const [redirecting,setRedirecting] = useState(false);
-    const [persona, setPersona] = useState({});
-    const [personaForUpdate, setPersonaForUpdate] = useState({});
-    const [nombre, setNombre] = useState("");
-    const [edad, setEdad] = useState(0);
-    const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
-    const cookie = new Cookies();
-    const [errorShow,setErrorShow] = useState(false);
-    React.useEffect(()=>{
-        const idPersona = cookie.get("idPersona");
-        fetch(`http://localhost:8080/Persona/getPersona/${idPersona}`,
-        {
-          method:"GET",
-          mode:"cors",
-          headers:{
-              "Content-Type":"application/json",
-              "Accept-Encoding":"gzip, deflate, br"
-          }
-      })
-      .then(r=>r.json())
-      .then(d=> {setPersona(d); setEdad(d.edad); setNombre(d.nombre); setEmail(d.email); setPass(d.contrasenia);});
-    },[])
+  const [redirecting, setRedirecting] = useState(false);
+  const [persona, setPersona] = useState({});
+  const [personaForUpdate, setPersonaForUpdate] = useState({});
+  const [nombre, setNombre] = useState("");
+  const [edad, setEdad] = useState(0);
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const cookie = new Cookies();
+  const [errorShow, setErrorShow] = useState(false);
+  React.useEffect(() => {
+    const idPersona = cookie.get("idPersona");
+    fetch(`http://localhost:8080/Persona/getPersona/${idPersona}`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept-Encoding": "gzip, deflate, br",
+      },
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        setPersona(d);
+        setEdad(d.edad);
+        setNombre(d.nombre);
+        setEmail(d.email);
+        setPass(d.contrasenia);
+      });
+  }, []);
 
-    return (
-        <div style={{display:"flex", flexDirection:"column"}}>
-            <div style={{position:"absolute", top:0,left:0, width:"100%",height:"100%",backgroundColor:"rgb(230, 230, 230,0.2)", display: (redirecting?"flex":"none"), justifyContent: "center", alignItems:"center"}}>
-                <div style={{width: 400, height: 600, backgroundColor:"white", borderRadius:15, borderColor:"green", border: "1px solid green"}}>
-                <div style={{width:"100%",height:"100%",display: "flex", justifyContent: "space-evenly", alignItems:"center", flexDirection:"column"}}>
-                    <h1 style={{textAlign:"center", color:"black"}}>Editar Perfil</h1>
-                    <h2>{(persona)?persona.usuario:""}</h2><br></br>
-                    {(errorShow)?<h3>Error al actualizar los datos, reintente.</h3>:null}
-                    <p>Nombre</p>
-                    <input
-                        className={styleInput.input2}
-                        style={{borderColor:"black"}}
-                        placeholder={"Nombre"}
-                        value={nombre}
-                        onChange={(e) => {setNombre(e.target.value);}}
-                    />
-                    <p>Edad</p>
-                    <input
-                        className={styleInput.input2}
-                        style={{borderColor:"black"}}
-                        placeholder={"Edad"}
-                        value={edad}
-                        onChange={(e) => {setEdad(e.target.value);}}
-                    />
-                    <p>Email</p>
-                    <input
-                        className={styleInput.input2}
-                        style={{backgroundColor:"gray"}}
-                        placeholder={"Email"}
-                        value={email}
-                        onChange={(e) => {setEmail(e.target.value);}}
-                        disabled
-                    />
-                    <p>Contraseña</p>
-                    <input
-                        className={styleInput.input2}
-                        style={{borderColor:"black"}}
-                        placeholder={"Contraseña"}
-                        value={pass}
-                        onChange={(e) => {setPass(e.target.value);}}
-                    />
-                    <div style={{display:"flex", gap:10}}>
-                        <PressableButton
-                                text="CERRAR"
-                                buttonStyle={{
-                                    backgroundColor: '#DA0D0D',
-                                    borderRadius: '8px',
-                                    marginRight: '10px',
-                                    width: 'fit-content',  
-                                    fontSize: '12px',     
-                                }}
-                                textStyle={{
-                                    color: '#fff',
-                                }}
-                                onClick={async () => {
-                                    setErrorShow(false);
-                                    setRedirecting(false);                                
-                                }}
-                            />
-                        <PressableButton
-                            text="Actualizar"
-                            buttonStyle={{
-                                backgroundColor: '#007bff',
-                                borderRadius: '8px',
-                                marginRight: '10px',
-                                width: 'fit-content',  
-                                fontSize: '12px',     
-                            }}
-                            textStyle={{
-                                color: '#fff',
-                            }}
-                            onClick={async () => {
-                                const response = await fetch(`http://localhost:8080/Persona/Update`,
-                                {
-                                method:"PUT",
-                                mode:"cors",
-                                headers:{
-                                    "Content-Type":"application/json",
-                                    "Accept-Encoding":"gzip, deflate, br"
-                                },
-                                body: JSON.stringify({ usuario: persona.usuario, contrasenia: pass, edad:edad,nombre:nombre, email:email}) 
-                                })
-                                const status = await response.status;
-                                if(status == 200){
-                                    setErrorShow(false);
-                                    setRedirecting(false);
-                                    window.location.href = "/profile";
-                                }
-                                if (status == 400){
-                                    setErrorShow(true);
-                                }
-                                
-                            }}
-                        />
-                    </div>
-                </div>
-                </div>
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgb(230, 230, 230,0.2)",
+          display: redirecting ? "flex" : "none",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: 400,
+            height: 600,
+            backgroundColor: "white",
+            borderRadius: 15,
+            borderColor: "green",
+            border: "1px solid green",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <h1 style={{ textAlign: "center", color: "black" }}>
+              Editar Perfil
+            </h1>
+            <h2>{persona ? persona.usuario : ""}</h2>
+            <br></br>
+            {errorShow ? (
+              <h3>Error al actualizar los datos, reintente.</h3>
+            ) : null}
+            <p>Nombre</p>
+            <input
+              className={styleInput.input2}
+              style={{ borderColor: "black" }}
+              placeholder={"Nombre"}
+              value={nombre}
+              onChange={(e) => {
+                setNombre(e.target.value);
+              }}
+            />
+            <p>Edad</p>
+            <input
+              className={styleInput.input2}
+              style={{ borderColor: "black" }}
+              placeholder={"Edad"}
+              value={edad}
+              onChange={(e) => {
+                setEdad(e.target.value);
+              }}
+            />
+            <p>Email</p>
+            <input
+              className={styleInput.input2}
+              style={{ backgroundColor: "gray" }}
+              placeholder={"Email"}
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              disabled
+            />
+            <p>Contraseña</p>
+            <input
+              className={styleInput.input2}
+              style={{ borderColor: "black" }}
+              placeholder={"Contraseña"}
+              value={pass}
+              onChange={(e) => {
+                setPass(e.target.value);
+              }}
+            />
+            <div style={{ display: "flex", gap: 10 }}>
+              <PressableButton
+                text="CERRAR"
+                buttonStyle={{
+                  backgroundColor: "#DA0D0D",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                  width: "fit-content",
+                  fontSize: "12px",
+                }}
+                textStyle={{
+                  color: "#fff",
+                }}
+                onClick={async () => {
+                  setErrorShow(false);
+                  setRedirecting(false);
+                }}
+              />
+              <PressableButton
+                text="Actualizar"
+                buttonStyle={{
+                  backgroundColor: "#007bff",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                  width: "fit-content",
+                  fontSize: "12px",
+                }}
+                textStyle={{
+                  color: "#fff",
+                }}
+                onClick={async () => {
+                  const response = await fetch(
+                    `http://localhost:8080/Persona/Update`,
+                    {
+                      method: "PUT",
+                      mode: "cors",
+                      headers: {
+                        "Content-Type": "application/json",
+                        "Accept-Encoding": "gzip, deflate, br",
+                      },
+                      body: JSON.stringify({
+                        usuario: persona.usuario,
+                        contrasenia: pass,
+                        edad: edad,
+                        nombre: nombre,
+                        email: email,
+                      }),
+                    }
+                  );
+                  const status = await response.status;
+                  if (status == 200) {
+                    setErrorShow(false);
+                    setRedirecting(false);
+                    window.location.href = "/profile";
+                  }
+                  if (status == 400) {
+                    setErrorShow(true);
+                  }
+                }}
+              />
             </div>
-            <div style={{display:"flex", justifyContent:"flex-start"}}>
-                <div className={styles.userInfo}>
-                    <div className={styles.userImage}>
-                        <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699113659/Avatar_jcqvt9.png" alt="Foto de perfil" className={styles.profileImage} />
-                    </div>
-                    <div className={styles.userInfoText}>
-
-                    <PressableButton
-                            text="Editar Perfil"
-                            buttonStyle={{
-                                backgroundColor: '#007bff',
-                                borderRadius: '8px',
-                                marginRight: '10px',
-                                width: 'fit-content',  
-                                fontSize: '12px',     
-                            }}
-                            textStyle={{
-                                color: '#fff',
-                            }}
-                            onClick={() => {
-                
-                                setRedirecting(!redirecting);
-                            }}
-                        />
-                    </div>
-                </div>
-                <div style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-                    <h1>{(persona)?persona.nombre:""}</h1>
-                    <p>{(persona)?persona.usuario:""}</p>
-                </div>
-                
-                
-            </div>
-            
-            
-            <div style={{ borderTop: '1px solid #ccc', margin: '20px 0' }}></div>
-            <div className={styles.profileContainer}>
-                <div className={styles.profileText}>
-                    <h2>Estadisticas</h2>
-                    <div className={styles.recuadrosContainer}>
-                        <div className={styles.recuadroEstadistica}>
-                            <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699114125/Vector_2_aqptul.png" alt="Foto fuego" />
-                                <div>
-                                <h4>0</h4>
-                                <h4>  Rachá de días</h4>
-                                </div>
-
-                        </div>
-                        <div className={styles.recuadroEstadistica}>
-                            <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1699114129/Icon_wy1q9u.png" alt="Foto rayo" />
-                            <div>
-                                <h4>22</h4>
-                                <h4>Xp Total</h4>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <h3>Logros</h3>
-                    <div className={styles.grayBorder}>
-                      <ImageWithText
-                        imageUrl="https://res.cloudinary.com/dgvlsnajj/image/upload/v1701045117/IncendioForestal_q3vfrc.png"
-                        text="Texto del logro"
-                        achievementName="Incendio Forestal"
-                        achievementProgress={25}  
-                        streakText="Alcanza una racha de 3 días"
-                      />
-                    </div>
-
-                    <div className={`${styles.grayBorder} grayBorder`}>
-                      <ImageWithText
-                        imageUrl="https://res.cloudinary.com/dgvlsnajj/image/upload/v1701045117/Sabio_keugpt.png"
-                        text="Texto del logro"
-                        achievementName="Sabio"
-                        achievementProgress={75} 
-                        streakText="Obtene 100 xp"
-                      />
-                    </div>
-
-                    <div className={`${styles.grayBorder} grayBorder`}>
-                      <ImageWithText
-                        imageUrl="https://res.cloudinary.com/dgvlsnajj/image/upload/v1701045117/Erudito_u9w1lh.png"
-                        text="Texto del logro"
-                        achievementName="Erudito"
-                        achievementProgress={50}  
-                        streakText="Termina tu primer modelo"
-                      />
-                    </div>
-                    <p className={`${styles.grayBorder} grayBorder`}>
-                      Ver todos 
-                    </p>
-                </div>
-                <div>
-
-                <div>
-
-                    <div className={styles.statsItem}>
-                        <h3>Amigos</h3>
-                    </div>
-
-                    <div className={styles.recuadro}>
-                        <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1701044349/foto_icon_ipp3vq.png" alt="Encontrar Amigos" />
-                        <h4>Encontra Amigos</h4>
-                        <p>Busca a otros alumnos</p>
-                    </div>
-
-                    <div className={styles.recuadro}>
-                        <img src="https://res.cloudinary.com/dgvlsnajj/image/upload/v1701044349/foto_lupa_aeefxj.png" alt="Invitar Amigos" />
-                        <h4>Invita Amigos</h4>
-                        <p>Contale a tus amigos que aprender con Finny es gratis y divertido.</p>
-                    </div>
-                </div>
-
-                </div>
-            </div>
-
-
+          </div>
         </div>
-    );
-}
+      </div>
+
+      <>
+        {/* Profile header */}
+        <div className={styles.userInfoContainer}>
+          {/* Profile image */}
+          <img
+            src={icons.profileImageIcon}
+            alt="Foto de perfil"
+            className={styles.profileImage}
+          />
+
+          {/* Profile info */}
+          <div className={styles.userInfo}>
+            {/* Name & Username */}
+            <div className={styles.userInfoUsername}>
+              <p className={styles.infoName}>{persona ? persona.nombre : ""}</p>
+              <p className={styles.infoUserName}>
+                {persona ? persona.usuario : ""}
+              </p>
+            </div>
+
+            {/* Edit profile */}
+            <PressableButton
+              text="Editar Perfil"
+              icon={icons.editIcon}
+              buttonStyle={{
+                backgroundColor: "#1CB0F6",
+                boxShadow: "0px 4px 0px 0px #1899D6",
+                height: "34px",
+              }}
+              iconStyle={{
+                width: "14px",
+                height: "14px",
+              }}
+              textStyle={{
+                color: "#fff",
+                marginLeft: "10px",
+                fontFamily: "Inter",
+                fontSize: "10px",
+                fontStyle: "normal",
+                fontWeight: 700,
+                lineHeight: "14px" /* 138.462% */,
+                letterSpacing: "0.8px",
+              }}
+              onClick={() => {
+                setRedirecting(!redirecting);
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Estadisticas y logros */}
+        <div className={styles.mainContainer}>
+          <div className={styles.leftContainer}>
+            {/* Stats */}
+            <p className={styles.title}>Estadisticas</p>
+            <div className={styles.statsContainer}>
+              <StatContainer
+                icon={icons.fireIcon}
+                title="4"
+                description="Racha de días"
+              />
+              <StatContainer
+                icon={icons.xpIcon}
+                title="27"
+                description="XP total"
+              />
+            </div>
+
+            {/* Logros */}
+            <div className={styles.logrosContainer}>
+              {/* Title */}
+              <p className={styles.title}>Logros</p>
+
+              <div className={styles.innerContainer}>
+                {logros.map((logro) => {
+                  return (
+                    <Logro
+                      key={logro.idLogro}
+                      icon={logro.icon}
+                      title={logro.titulo}
+                      achievementProgress={25}
+                      description={logro.descripcion}
+                    />
+                  );
+                })}
+
+                <div className={styles.verTodosContainer}>
+                  <p className={styles.verTodosTitle}>Ver todos</p>
+                  <img
+                    alt="Ver todos"
+                    className={styles.verTodosIcon}
+                    src={icons.rightArrowIcon}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Amigos */}
+          <div className={styles.rightContainer}>
+            <p className={styles.title}>Amigos</p>
+
+            <div className={styles.amigosContainer}>
+              {amigos.map((amigo) => {
+                return (
+                  <AgregarAmigo
+                    key={amigo.idAmigo}
+                    idAmigo={amigo.idAmigo}
+                    icon={amigo.icon}
+                    title={amigo.titulo}
+                    description={amigo.descripcion}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </>
+    </div>
+  );
+};
 
 export default ProfileView;

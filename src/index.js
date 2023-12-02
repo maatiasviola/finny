@@ -5,10 +5,8 @@ import Login from "./pages/Login/Login";
 import "./index.css";
 import Home from "./pages/Home/Home";
 import Lesson from "./pages/Lesson/Lesson";
-import Clasification from "./pages/Clasification/Clasification";
 
 import Profile from "./pages/Profile/Profile";
-import Cookies from "universal-cookie";
 
 const router = createBrowserRouter([
   {
@@ -27,10 +25,6 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <Profile />,
   },
-  {
-    path:"/clasification",
-    element:<Clasification/>
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

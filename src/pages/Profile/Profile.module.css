@@ -1,53 +1,17 @@
 .container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .loginContainer {
-    width: 25vw;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .loginTitle {
-    color: #3c3c3c;
-    text-align: center;
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 40px; /* 173.913% */
-    margin: 10px 0 15px;
-  }
-  
-  .facebookGoogleButtons {
-    margin-top: 5px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  
-  .terminosCondicionesContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 10px;
-    padding-top: 40px;
-  }
-  
-  .terminosPrivacidad {
-    margin-bottom: 20px;
-    color: #afafaf;
-    font-size: 14px;
-    text-align: center;
-  }
-  
-  b {
-    font-weight: 700;
-  }
-  
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.homeContainer {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.profileContainer {
+  z-index: 0; /* cambiar a 1 */
+  flex: 1;
+  margin-right: 80px;
+}

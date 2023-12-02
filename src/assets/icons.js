@@ -49,6 +49,13 @@ const natoli = require("./icons/natoli.png");
 const save = require("./icons/save.png");
 const estrella = require("./icons/Estrella_amarilla.png");
 const leftArrow = require("./icons/leftArrow.png");
+const profileImageIcon = require("./icons/profilImageIcon.png");
+const editIcon = require("./icons/editIcon.png");
+const logro1 = require("./icons/logro1.png");
+const logro2 = require("./icons/logro2.png");
+const logro3 = require("./icons/logro3.png");
+const rightArrowIcon = require("./icons/rightArrowIcon.png");
+const searchIcon = require("./icons/searchIcon.png");
 
 // Unidad 1
 const gastarIcon = require("./icons/gastarIcon.png");
@@ -76,6 +83,18 @@ const liquidezIcon = require("./icons/liquidezIcon.png");
 const eficienciaIcon = require("./icons/eficienciaIcon.png");
 const rentabilidadIcon = require("./icons/rentabilidadIcon.png");
 const valuacionIcon = require("./icons/valuacionIcon.png");
+const warren1 = require("./icons/warren1.png");
+const warren2 = require("./icons/warren2.png");
+const warren3 = require("./icons/warren3.png");
+const warren4 = require("./icons/warren4.png");
+const warren5 = require("./icons/warren5.png");
+const warren6 = require("./icons/warren6.png");
+const warren7 = require("./icons/warren7.png");
+const soporteIcon = require("./icons/soporteIcon.png");
+const resistenciaIcon = require("./icons/resistenciaIcon.png");
+const alcistaIcon = require("./icons/alcistaIcon.png");
+const bajistaIcon = require("./icons/bajistaIcon.png");
+const lateralIcon = require("./icons/lateralIcon.png");
 
 export const icons = {
   googleIcon,
@@ -141,4 +160,23 @@ export const icons = {
   eficienciaIcon,
   rentabilidadIcon,
   valuacionIcon,
+  profileImageIcon,
+  editIcon,
+  logro1,
+  logro2,
+  logro3,
+  rightArrowIcon,
+  searchIcon,
+  warren1,
+  warren2,
+  warren3,
+  warren4,
+  warren5,
+  warren6,
+  warren7,
+  soporteIcon,
+  resistenciaIcon,
+  alcistaIcon,
+  bajistaIcon,
+  lateralIcon,
 };

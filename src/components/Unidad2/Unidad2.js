@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { icons } from "../../assets/icons";
 import styles from "./Unidad2.module.css";
-import PressableButton from "../PressableButton/PressableButton";
 import Leccion1 from "../Unidades/Unidad2/Leccion1";
 import Leccion2 from "../Unidades/Unidad2/Leccion2";
 import Leccion3 from "../Unidades/Unidad2/Leccion3";
+import UnidadItem from "../UnidadItem";
 
 const Unidad2 = ({ mostrarUnidad }) => {
   const [leccionActual, setLeccionActual] = useState(1);
@@ -35,9 +35,21 @@ const Unidad2 = ({ mostrarUnidad }) => {
           <p className={styles.volverText}>Home</p>
         </div>
         <div className={styles.cambiarLeccionContainer}>
-          <PressableButton text="1" onClick={() => handleChangeLeccion(1)} />
-          <PressableButton text="2" onClick={() => handleChangeLeccion(2)} />
-          <PressableButton text="3" onClick={() => handleChangeLeccion(3)} />
+          <UnidadItem
+            active={leccionActual === 1}
+            text="1"
+            onClick={() => handleChangeLeccion(1)}
+          />
+          <UnidadItem
+            active={leccionActual === 2}
+            text="2"
+            onClick={() => handleChangeLeccion(2)}
+          />
+          <UnidadItem
+            active={leccionActual === 3}
+            text="3"
+            onClick={() => handleChangeLeccion(3)}
+          />
         </div>
       </div>
 
