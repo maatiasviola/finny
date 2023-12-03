@@ -140,4 +140,5 @@ const Seccion = styled.div`
   margin-top: ${(props) => props.marginTop && props.marginTop};
   color: #ffffff;
   margin-bottom: 20px;
+  margin-top: 20px;
 `;

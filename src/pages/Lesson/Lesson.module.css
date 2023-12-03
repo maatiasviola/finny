@@ -36,7 +36,7 @@
 .lessonItemsContainer {
   min-height: 400px;
   overflow: visible;
-  width: 600px;
+  width: 800px;
   grid-template-rows: min-content minmax(0, 1fr);
   grid-gap: 24px;
   display: grid;

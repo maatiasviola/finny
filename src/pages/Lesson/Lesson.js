@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Lesson.module.css";
 import { quizzes } from "../../constants/quizzes";
 import LessonHeader from "../../components/LessonHeader/LessonHeader";
@@ -33,6 +33,9 @@ function Lesson() {
   const [exp,setExp]=useState(0);
 
   const location=useLocation();
+
+  const correctoRef= useRef(null);
+  const incorrectoRef= useRef(null);
 
   useEffect(() => {
     setPreguntas(location.state.nivelAJugar);
@@ -99,10 +102,12 @@ function Lesson() {
     let respuestaCorrecta = preguntas[preguntaActual].respuestaCorrecta;
 
     if (respuestaCorrecta === active) {
+      correctoRef.current.play();
       setContadorAcertadas(contadorAcertadas + 1);
       if(!rondaFalladas){setPuntos(puntos+preguntas[preguntaActual].puntosPosibles);}
       setEstadoRespuesta("correcta");
     } else {
+      incorrectoRef.current.play();
       if(!rondaFalladas){
         setBien(bien-1);
       }
@@ -155,6 +160,12 @@ function Lesson() {
 
   return (
     <div className={styles.container}>
+      <audio ref={correctoRef}>
+        <source src={require("./correcto.mp3")} type="audio/mpeg"/>
+      </audio>
+      <audio ref={incorrectoRef}>
+        <source src={require("./incorrecto.mp3")} type="audio/mpeg"/>
+      </audio>
       {/* Header */}
       {!leccionTerminada && (
         <LessonHeader lifes={lifes} percentage={percentage} />

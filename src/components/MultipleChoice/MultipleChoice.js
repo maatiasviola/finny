@@ -14,7 +14,7 @@ function MultipleChoice({ quiz, handleOpcion, active }) {
             <PressableMultipleChoiceOption
               key={opcion.idOpcion}
               text={opcion.texto}
-              number={opcion.idOpcion}
+              number={opcion.idOpcion+1}
               onClick={() => handleOpcion(opcion.idOpcion)}
               active={active === opcion.idOpcion}
             />

@@ -13,17 +13,6 @@ function Header() {
 
       {/* Icons */}
       <div className={styles.iconsContainer}>
-        {/* Racha */}
-        <div className={styles.singleIconContainer}>
-          <img className={styles.icon} src={icons.fireIcon} alt="Racha" />
-          <p className={styles.fireText}>1</p>
-        </div>
-
-        {/* Super */}
-        <div className={styles.singleIconContainer}>
-          <img className={styles.icon} src={icons.superIcon} alt="Super" />
-          <p className={styles.superText}>Ir Super</p>
-        </div>
 
         {/* Avatar */}
         <img
