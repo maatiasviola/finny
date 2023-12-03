@@ -13,16 +13,17 @@ function Home() {
 
   let contenidoRenderizado;
 
-  if (unidad === 0) {
+  if (unidad === 1) {
+    contenidoRenderizado = <Unidad1 mostrarUnidad={mostrarUnidad} />;
+  } else if (unidad === 2) {
+    contenidoRenderizado = <Unidad2 mostrarUnidad={mostrarUnidad} />;
+  }
+  else{
     contenidoRenderizado = (
       <div className={styles.unidadesContainer}>
         <Unidad mostrarUnidad={mostrarUnidad} />
       </div>
     );
-  } else if (unidad === 1) {
-    contenidoRenderizado = <Unidad1 mostrarUnidad={mostrarUnidad} />;
-  } else if (unidad === 2) {
-    contenidoRenderizado = <Unidad2 mostrarUnidad={mostrarUnidad} />;
   }
   const cookie = new Cookies();
   document.title = "Finny - Home";

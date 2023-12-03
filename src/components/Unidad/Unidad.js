@@ -10,7 +10,7 @@ import { coordenadasRuta } from "../../constants/quizzes";
 
 function Unidad({ mostrarUnidad }) {
   const [persona, setPersona] = useState(null);
-  //const [levels,setLevels]=useState([]);
+  const [levels,setLevels]=useState([]);
 
   const cookie = new Cookies();
 
@@ -21,7 +21,10 @@ function Unidad({ mostrarUnidad }) {
   const handleGuia = (nroGuia) => {
     mostrarUnidad(nroGuia);
   };
-  /* 
+  
+  let actualLeft=11;
+  let beforeLeft=0;
+  let flip=false;
   
   async function fetchUsuario(){
     const idPersona = cookie.get("idPersona");
@@ -70,22 +73,22 @@ function Unidad({ mostrarUnidad }) {
       }
     }
   ,[persona?persona:null]);
-*/
+
 
   return (
     <div className={styles.container}>
-      <Seccion>
+      {levels.map((unidad) => {return <div> <Seccion>
         {/* Seccion Heading */}
         <div className={styles.unidadInfo}>
-          <h1 className={styles.unidadTitulo}>Unidad 1</h1>
+          <h1 className={styles.unidadTitulo}>Unidad {unidad.numero}</h1>
           <span className={styles.unidadDescripcion}>
-            Tus primeros pasos en las inversiones
+            {unidad.subtitulo}
           </span>
         </div>
         <PressableButton
           text="Guía"
           icon={icons.bookIcon}
-          onClick={() => handleGuia(1)}
+          onClick={() => handleGuia(unidad.numero)}
           buttonStyle={{
             backgroundColor: "#CE82FF",
             borderWidth: "2px",
@@ -101,44 +104,26 @@ function Unidad({ mostrarUnidad }) {
       </Seccion>
       {/* Seccion Niveles */}
       <div className={styles.nivelesContainer}>
-        {coordenadasRuta.map((item, index) => {
-          return <Nivel colorFondo="#CE82FF" left={item.left} key={index} />;
+        {unidad.niveles.map((nivel, index) => {
+          if(actualLeft==11 || actualLeft==-11){
+          actualLeft=0;
+        }
+        else{
+          if(flip){
+            actualLeft=-11;
+            flip=false;
+          }
+          else{
+            actualLeft=11;
+            flip=true;
+          }
+        }
+          return <Nivel key={index} colorFondo={nivel.hecho ? "#58cc02" : "#CE82FF"} nivelAJugar={nivel.juegos} idNivel={nivel.idNivel} left={`${actualLeft}vw`} />;
         })}
       </div>
-
-      {/* Unidad 2 */}
-      <Seccion backgroundColor="#58CC02" marginTop="30px">
-        {/* Seccion Heading */}
-        <div className={styles.unidadInfo}>
-          <h1 className={styles.unidadTitulo}>Unidad 2</h1>
-          <span className={styles.unidadDescripcion}>
-            Mente rica, mente pobre
-          </span>
-        </div>
-        <PressableButton
-          text="Guía"
-          icon={icons.bookIcon}
-          onClick={() => handleGuia(2)}
-          buttonStyle={{
-            backgroundColor: "#58CC02",
-            borderWidth: "2px",
-            borderStyle: "solid",
-            borderColor: "rgba(0, 0, 0, 0.20)",
-            boxShadow: "0px 4px 0px 0px rgba(0, 0, 0, 0.20)",
-          }}
-          textStyle={{
-            color: "#FFF",
-            marginLeft: "10px",
-          }}
-        />
-      </Seccion>
-      {/* Seccion Niveles */}
-      <div className={styles.nivelesContainer}>
-        {coordenadasRuta.map((item, index) => {
-          return <Nivel colorFondo="#58CC02" left={item.left} key={index} />;
-        })}
-      </div>
+      </div>})}
     </div>
+      
   );
 }
 

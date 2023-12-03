@@ -9,7 +9,7 @@ function Nivel({ idNivel, nivelAJugar, left, colorFondo }) {
 
   return (
     <PressableButton
-      //onClick={() => {navigate("/lesson",{state:{nivelAJugar,idNivel}});}}
+      onClick={() => {navigate("/lesson",{state:{nivelAJugar,idNivel}});}}
       idNivel={idNivel}
       icon={icons.starIcon}
       iconStyle={{
