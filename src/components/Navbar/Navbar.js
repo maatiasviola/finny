@@ -9,6 +9,8 @@ function Navbar() {
   React.useEffect(() => {
     if (window.location.href.includes("profile")) {
       setActive("Perfil");
+    } else if(window.location.href.includes("clasification")){
+      setActive("Clasificacion");
     }
   }, []);
 
@@ -26,6 +28,7 @@ function Navbar() {
       <NavbarItem
         onClick={() => {
           setActive("Clasificacion");
+          window.location.href = "/clasification";
         }}
         active={active === "Clasificacion"}
         icon={icons.leaderboardIcon}

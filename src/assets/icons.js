@@ -96,6 +96,7 @@ const alcistaIcon = require("./icons/alcistaIcon.png");
 const bajistaIcon = require("./icons/bajistaIcon.png");
 const lateralIcon = require("./icons/lateralIcon.png");
 
+
 export const icons = {
   googleIcon,
   facebookIcon,

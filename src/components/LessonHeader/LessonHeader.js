@@ -4,7 +4,7 @@ import { icons } from "../../assets/icons";
 
 function LessonHeader({ lifes, percentage }) {
   const handleClose = () => {
-    window.location = `/`;
+    window.location = `/home`;
   };
   return (
     <div className={styles.header}>

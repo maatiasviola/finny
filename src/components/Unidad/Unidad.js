@@ -11,6 +11,8 @@ import { coordenadasRuta } from "../../constants/quizzes";
 function Unidad({ mostrarUnidad }) {
   const [persona, setPersona] = useState(null);
   const [levels,setLevels]=useState([]);
+  const [ultimaUnidad,setUltimaUnidad]=useState(-1);
+  const [ultimoIndice,setUltimoIndice]=useState(-1);
 
   const cookie = new Cookies();
 
@@ -21,6 +23,8 @@ function Unidad({ mostrarUnidad }) {
   const handleGuia = (nroGuia) => {
     mostrarUnidad(nroGuia);
   };
+
+  var empiezoABloquear=-1;
   
   let actualLeft=11;
   let beforeLeft=0;
@@ -53,13 +57,44 @@ function Unidad({ mostrarUnidad }) {
       );
       const data= await response.json();
       setLevels(await data.unidades);
+      indiceABloquear(await data.unidades);
     } catch (error) {
       console.log("Error en el fetch de las unidades");
       console.log(error);
     }
   }
   
+  function indiceABloquear(unidades) {
+    var ultimaUnidadLocal=ultimaUnidad;
+    var ultimoIndiceLocal=ultimoIndice;
+    
+    
+    unidades?.map((unidad, index) => {
+      
+      unidad.niveles.map((nivel,indexNivel) => {
+        if (!nivel.hecho) {
+          if (ultimaUnidadLocal == -1) {
+            console.log("ULTIMO INDICE: "+indexNivel);
+            console.log("ULTIMA UNIDAD: "+unidad.numero);
+            ultimoIndiceLocal=indexNivel;
+            ultimaUnidadLocal=unidad.numero;
+            setUltimoIndice(indexNivel);
+            setUltimaUnidad(unidad.numero);
+          }
+        }
+      })
 
+    });
+  
+    // Si la unidad actual es la unidad 1 y quieres desbloquear la unidad 2,
+    // establece el indice de bloqueo al final de la unidad 1
+    // if (unidad.numero === 1) {
+    //   return lista.length; // Esto hará que todos los niveles de la unidad 1 estén desbloqueados
+    // }
+  
+    return ultimoIndice + 1;
+  }
+  
   React.useEffect(
     () => {
       
@@ -77,7 +112,7 @@ function Unidad({ mostrarUnidad }) {
 
   return (
     <div className={styles.container}>
-      {levels.map((unidad) => {return <div> <Seccion>
+      {(levels) ? levels.map((unidad) => {return <div> <Seccion>
         {/* Seccion Heading */}
         <div className={styles.unidadInfo}>
           <h1 className={styles.unidadTitulo}>Unidad {unidad.numero}</h1>
@@ -118,10 +153,12 @@ function Unidad({ mostrarUnidad }) {
             flip=true;
           }
         }
-          return <Nivel key={index} colorFondo={nivel.hecho ? "#58cc02" : "#CE82FF"} nivelAJugar={nivel.juegos} idNivel={nivel.idNivel} left={`${actualLeft}vw`} />;
+        
+        
+          return <Nivel key={index} colorFondo={nivel.hecho ? "#58cc02" : "#CE82FF"} permitir= {(ultimaUnidad>unidad.numero)?true:((ultimaUnidad==unidad.numero)?((ultimoIndice>=index)?true:false):false)} nivelAJugar={nivel.juegos} idNivel={nivel.idNivel} left={`${actualLeft}vw`} />;
         })}
       </div>
-      </div>})}
+      </div>}):null}
     </div>
       
   );
